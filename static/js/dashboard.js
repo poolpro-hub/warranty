@@ -1,4 +1,4 @@
-
+s
 document.addEventListener('DOMContentLoaded', async () => {
     const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
     const data = await getSheetData('Pool Pro Live - Form Submissions');
@@ -7,9 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const counts = {
         New: 0,
         Viewed: 0,
-        Investigating: 0,
+        Progress: 0,
         Rejected: 0,
-        Actioning: 0,
         Complete: 0
     };
 
@@ -22,9 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('new-requests-count').textContent = counts.New;
     document.getElementById('viewed-count').textContent = counts.Viewed;
-    document.getElementById('investigating-count').textContent = counts.Investigating;
+    document.getElementById('progress-count').textContent = counts.Progress;
     document.getElementById('rejected-count').textContent = counts.Rejected;
-    document.getElementById('actioning-count').textContent = counts.Actioning;
     document.getElementById('complete-count').textContent = counts.Complete;
 });
 
