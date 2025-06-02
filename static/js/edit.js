@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         input.className = 'form-control';
         input.id = header1[index];
         input.name = header1[index];
+        input.value = value;
+	    
         // Make ClaimNumber read-only
         if (header1[index] === 'ClaimNumber') {
             input.readOnly = true;
@@ -42,8 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
  	        dateInsert = new Date(value);
 	        input.valueAsDate = dateInsert;
         }
-        input.value = value;
-
 
         formGroup.appendChild(label);
         formGroup.appendChild(input);
