@@ -45,6 +45,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	        input.valueAsDate = dateInsert;
         }
 
+        // Make DateOfPurchase read-only
+        if (header1[index] === 'DateOfPurchase') {
+            input.setAttribute("type", "date");
+	    dateInsert = new Date(value);
+	    input.valueAsDate = dateInsert;
+        }
+	    
         formGroup.appendChild(label);
         formGroup.appendChild(input);
         editForm.insertBefore(formGroup, editForm.lastElementChild);
