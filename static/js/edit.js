@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const claimNumber = urlParams.get('claimNumber');
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 //    });
 
 
-    headers.forEach((header, index) => {
+    entry.forEach((header, index) => {
         const value = entry[index] || '';
         const formGroup = document.createElement('div');
         formGroup.className = 'form-group';
