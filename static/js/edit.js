@@ -24,17 +24,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         formGroup.className = 'form-group';
 
         const label = document.createElement('label');
-        label.setAttribute('for', header);
-        label.textContent = header;
+        label.setAttribute('for', header1[index]);
+        label.textContent = header1[index];
 
         const input = document.createElement('input');
         input.className = 'form-control';
-        input.id = header;
-        input.name = header;
+        input.id = header1[index];
+        input.name = header1[index];
         input.value = value;
 
         // Make ClaimNumber read-only
-        if (header === 'ClaimNumber') {
+        if (header1[index] === 'ClaimNumber') {
             input.readOnly = true;
         }
 
