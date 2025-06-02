@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Make SubmissionDate read-only
         if (header1[index] === 'SubmissionDate') {
             input.setAttribute('type', 'date');
-        }
+ 	        dateInsert = new Date(value);
+	        input.valueAsDate = dateInsert;
+        }
         input.value = value;
 
 
