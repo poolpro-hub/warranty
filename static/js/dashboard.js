@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const statuses = ['New', 'Viewed', 'In Progress', 'Rejected', 'Complete'];
+    const statuses = ['New', 'Viewed', 'InProgress', 'Rejected', 'Complete'];
     const data = await getSheetData('Pool Pro Live - Form Submissions');
     const rows = data.slice(1); // Skip header row
 
