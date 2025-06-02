@@ -1,4 +1,3 @@
-s
 document.addEventListener('DOMContentLoaded', async () => {
     const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
     const data = await getSheetData('Pool Pro Live - Form Submissions');
