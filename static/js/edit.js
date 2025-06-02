@@ -1,0 +1,27 @@
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const claimNumber = urlParams.get('claimNumber');
+    const editForm = document.getElementById('edit-form');
+    const data = await getSheetData('Pool Pro Live - Form Submissions');
+    const entry = data.find(row => row[0] === claimNumber);
+    const header1 = data[0];
+
+
+    entry.forEach((value, index) => {
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+        formGroup.innerHTML = `
+            <label for="field-${index}">${header1[index]}</label>
+            <input type="text" class="form-control" id="field-${index}" value="${value}">
+        `;
+        editForm.insertBefore(formGroup, editForm.lastElementChild);
+    });
+
+    editForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const updatedValues = Array.from(editForm.elements).map(input => input.value);
+        await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
+        alert('Changes saved successfully!');
+    });
+});
