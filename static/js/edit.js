@@ -67,7 +67,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         event.preventDefault();
         const updatedValues = Array.from(editForm.elements).map(input => input.value);
-        await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
-        alert('Changes saved successfully!');
+	try {
+        	await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
+        	alert('Changes saved successfully!');
+	 } catch (error) {
+            alert('Failed to update. Please ensure you are signed in and authorized.');
+            console.error(error);
+        }   
     });
 });
