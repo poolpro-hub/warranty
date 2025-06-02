@@ -1,6 +1,6 @@
 
 function handleCredentialResponse(response) {
-    const clientId = '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';
+    const clientId = '1011600113632-ohnfvij8v9p3kbsrbtoip9cc4735oksh.apps.googleusercontent.com';
     const token = response.credential;
     localStorage.setItem('google_token', token);
     document.getElementById('signin-button').style.display = 'none';
@@ -9,7 +9,7 @@ function handleCredentialResponse(response) {
 
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: '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',
+        client_id: clientId,
         callback: handleCredentialResponse
     });
     google.accounts.id.renderButton(
