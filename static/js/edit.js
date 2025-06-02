@@ -8,15 +8,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     const header1 = data[0];
 
 
-    entry.forEach((value, index) => {
-        const formGroup = document.createElement('div');
-        formGroup.className = 'form-group';
-        formGroup.innerHTML = `
-            <label for="field-${index}">${header1[index]}</label>
-            <input type="text" class="form-control" id="field-${index}" value="${value}">
-        `;
-        editForm.insertBefore(formGroup, editForm.lastElementChild);
-    });
+//    entry.forEach((value, index) => {
+//        const formGroup = document.createElement('div');
+//        formGroup.className = 'form-group';
+//        formGroup.innerHTML = `
+//            <label for="field-${index}">${header1[index]}</label>
+//            <input type="text" class="form-control" id="field-${index}" value="${value}">
+//        `;
+//        editForm.insertBefore(formGroup, editForm.lastElementChild);
+//    });
+
+
+    headers.forEach((header, index) => {
+        const value = entry[index] || '';
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
+
+        const label = document.createElement('label');
+        label.setAttribute('for', header);
+        label.textContent = header;
+
+        const input = document.createElement('input');
+        input.className = 'form-control';
+        input.id = header;
+        input.name = header;
+        input.value = value;
+
+        // Make ClaimNumber read-only
+        if (header === 'ClaimNumber') {
+            input.readOnly = true;
+        }
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(input);
+        form.insertBefore(formGroup, form.lastElementChild);
+    });
 
     editForm.addEventListener('submit', async (event) => {
         event.preventDefault();
