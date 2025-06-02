@@ -11,7 +11,7 @@ async function getSheetData(range) {
 }
 
 async function updateSheetData(range, values) {
-    const sheetId = 'YOUR_GOOGLE_SHEET_ID';
+    const sheetId = '1ZGmhCzBU36_cpQzjH9vrivtmMXmpeVIqUAU61YP2gtg';
     const token = localStorage.getItem('google_token');
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?valueInputOption=USER_ENTERED`;
     const body = {
