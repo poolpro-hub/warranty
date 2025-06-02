@@ -58,6 +58,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     editForm.addEventListener('submit', async (event) => {
+	    const token = localStorage.getItem('google_token');
+	    if (!token) {
+	        alert('You must sign in with Google before editing.');
+	        window.location.href = 'index.html';
+	        return;
+	    }
+
         event.preventDefault();
         const updatedValues = Array.from(editForm.elements).map(input => input.value);
         await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
