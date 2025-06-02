@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         formGroup.appendChild(label);
         formGroup.appendChild(input);
-        form.insertBefore(formGroup, form.lastElementChild);
+        editForm.insertBefore(formGroup, editForm.lastElementChild);
     });
 
     editForm.addEventListener('submit', async (event) => {
