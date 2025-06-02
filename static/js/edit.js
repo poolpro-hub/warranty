@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             input.readOnly = true;
         }
 
+        // Make SubmissionDate read-only
+        if (header1[index] === 'SubmissionDate') {
+            input.setAttribute('type', 'date');
+        }
         formGroup.appendChild(label);
         formGroup.appendChild(input);
         editForm.insertBefore(formGroup, editForm.lastElementChild);
