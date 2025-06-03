@@ -1,78 +1,61 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('google_token');
+    if (!token) {
+        alert('You must sign in with Google before editing.');
+        window.location.href = 'index.html';
+        return;
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
     const claimNumber = urlParams.get('claimNumber');
-    const editForm = document.getElementById('edit-form');
     const data = await getSheetData('Pool Pro Live - Form Submissions');
-    const entry = data.find(row => row[0] === claimNumber);
-    const header1 = data[0];
+    const headers = data[0];
+    const rows = data.slice(1);
+    const entry = rows.find(row => row[0] === claimNumber);
 
+    if (!entry) {
+        alert('Entry not found.');
+        return;
+    }
 
-//    entry.forEach((value, index) => {
-//        const formGroup = document.createElement('div');
-//        formGroup.className = 'form-group';
-//        formGroup.innerHTML = `
-//            <label for="field-${index}">${header1[index]}</label>
-//            <input type="text" class="form-control" id="field-${index}" value="${value}">
-//        `;
-//        editForm.insertBefore(formGroup, editForm.lastElementChild);
-//    });
+    const form = document.getElementById('edit-form');
 
+    headers.forEach((header, index) => {
+        const value = entry[index] || '';
+        const formGroup = document.createElement('div');
+        formGroup.className = 'form-group';
 
-    entry.forEach((header, index) => {
-        const value = entry[index] || '';
-        const formGroup = document.createElement('div');
-        formGroup.className = 'form-group';
+        const label = document.createElement('label');
+        label.setAttribute('for', header);
+        label.textContent = header;
 
-        const label = document.createElement('label');
-        label.setAttribute('for', header1[index]);
-        label.textContent = header1[index];
-
-        const input = document.createElement('input');
-        input.className = 'form-control';
-        input.id = header1[index];
-        input.name = header1[index];
+        const input = document.createElement('input');
+        input.className = 'form-control';
+        input.id = header;
+        input.name = header;
         input.value = value;
-	    
-        // Make ClaimNumber read-only
-        if (header1[index] === 'ClaimNumber') {
-            input.readOnly = true;
-        }
 
-        // Make SubmissionDate read-only
-        if (header1[index] === 'SubmissionDate') {
-            input.setAttribute('type', 'date');
- 	        dateInsert = new Date(value);
-	        input.valueAsDate = dateInsert;
+        if (header === 'ClaimNumber') {
+            input.readOnly = true;
         }
 
-        // Make DateOfPurchase read-only
-        if (header1[index] === 'DateOfPurchase') {
-            input.setAttribute("type", "date");
-	    dateInsert = new Date(value);
-	    input.valueAsDate = dateInsert;
-        }
-	    
-        formGroup.appendChild(label);
-        formGroup.appendChild(input);
-        editForm.insertBefore(formGroup, editForm.lastElementChild);
-    });
+        formGroup.appendChild(label);
+        formGroup.appendChild(input);
+        form.insertBefore(formGroup, form.lastElementChild);
+    });
 
-    editForm.addEventListener('submit', async (event) => {
-	    const token = localStorage.getItem('google_token');
-	    if (!token) {
-	        alert('You must sign in with Google before editing.');
-	        window.location.href = 'index.html';
-	        return;
-	    }
-
-        event.preventDefault();
-        const updatedValues = Array.from(editForm.elements).map(input => input.value);
-	try {
-        	await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
-        	alert('Changes saved successfully!');
-	 } catch (error) {
-            alert('Failed to update. Please ensure you are signed in and authorized.');
-            console.error(error);
-        }   
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const updatedValues = headers.map(header => document.getElementById(header).value);
+        const rowIndex = rows.findIndex(row => row[0] === claimNumber) + 2;
+        const range = `Pool Pro Live - Form Submissions!A${rowIndex}`;
+        try {
+            await updateSheetData(range, [updatedValues]);
+            alert('Changes saved successfully!');
+        } catch (error) {
+            alert('Failed to update. Please ensure you are signed in and authorized.');
+            console.error(error);
+        }
     });
 });

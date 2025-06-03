@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warranty Requests List</title>
+    <title>Warranty Requests</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="static/js/auth.js"></script>
-    <script src="static/js/dashboard.js"></script>
-    <script src="static/js/sheets.js"></script>
     <script src="static/js/list.js"></script>
 </head>
 <body>
@@ -21,21 +17,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="list.html">All Entries</a>
                 </li>
-                <li class="nav-item">
-            	    <button id="signin-button" class="btn btn-outline-success my-2 my-sm-0">Sign In</button>
-		        </li>
             </ul>
         </div>
     </nav>
     <div class="container mt-4">
-        <h2>Warranty Requests List - <span id="status-title"></span></h2>
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Claim Number</th>
-                    <th>Status</th>
                     <th>Submission Date</th>
-                    <th>Shop Name</th>
+                    <th>Claim Requested By Shop Name</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -44,9 +36,5 @@
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="static/js/sheets.js"></script>
 </body>
 </html>
