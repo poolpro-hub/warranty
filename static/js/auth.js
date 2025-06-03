@@ -14,7 +14,8 @@ window.onload = function () {
 
     google.accounts.id.initialize({
         client_id: '315427187582-pajr97j8pcbjh6r4imd40m56dk674rla.apps.googleusercontent.com',
-        callback: handleCredentialResponse
+        callback: handleCredentialResponse,
+        auto_select: true
     });
     google.accounts.id.renderButton(
         document.getElementById('signin-button'),
