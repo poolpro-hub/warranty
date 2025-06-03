@@ -44,7 +44,7 @@ async function getSheetData(range) {
 
 
 async function updateSheetData(range, values) {
-    const response = await fetch(`${BASE_URL}/${range}?key=${API_KEY}`, {
+    const response = await fetch(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
