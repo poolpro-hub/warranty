@@ -2,7 +2,7 @@
 function handleCredentialResponse(response) {
     const token = response.credential;
     localStorage.setItem('google_token', token);
-    window.location.reload();
+//    window.location.reload();
 }
 
 window.onload = function () {
