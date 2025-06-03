@@ -48,6 +48,7 @@ async function updateSheetData(range, values) {
     const response = await fetch(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`, {
         method: 'PUT',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ values })
