@@ -4,11 +4,25 @@ const SHEET_ID = '1ZGmhCzBU36_cpQzjH9vrivtmMXmpeVIqUAU61YP2gtg';
 const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values`;
 const SHEET_NAME = 'Pool Pro Live - Form Submissions';
 
-async function getSheetData(range) {
-    const response = await fetch(`${BASE_URL}/${SHEET_NAME}?key=${API_KEY}`);
-    const data = await response.json();
-    return data.values;
+//async function getSheetData(range) {
+//    const response = await fetch(`${BASE_URL}/${SHEET_NAME}?key=${API_KEY}`);
+//    const data = await response.json();
+//    return data.values;
+//}
+
+
+async function getSheetData(sheetName) {
+    const token = localStorage.getItem('google_token');
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}`;
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    const data = await response.json();
+    return data.values;
 }
+
 
 async function updateSheetData(range, values) {
     const sheetId = '1ZGmhCzBU36_cpQzjH9vrivtmMXmpeVIqUAU61YP2gtg';
