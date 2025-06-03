@@ -10,10 +10,12 @@ function handleCredentialResponse(response) {
 window.onload = function () {
     google.accounts.id.initialize({
         client_id: '1011600113632-ohnfvij8v9p3kbsrbtoip9cc4735oksh.apps.googleusercontent.com',
-        callback: handleCredentialResponse
+        callback: handleCredentialResponse,
+        auto_select: true
     });
     google.accounts.id.renderButton(
         document.getElementById('signin-button'),
         { theme: 'outline', size: 'large' }
     );
+    google.accounts.id.prompt(); // Shows One Tap or auto sign-in
 };
