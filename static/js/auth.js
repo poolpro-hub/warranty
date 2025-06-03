@@ -6,6 +6,12 @@ function handleCredentialResponse(response) {
 }
 
 window.onload = function () {
+
+    if (typeof google === 'undefined') {
+        console.error('Google Identity Services not loaded.');
+        return;
+    }
+
     google.accounts.id.initialize({
         client_id: '315427187582-pajr97j8pcbjh6r4imd40m56dk674rla.apps.googleusercontent.com',
         callback: handleCredentialResponse
