@@ -1,5 +1,6 @@
 
 const SHEET_ID = '1ZGmhCzBU36_cpQzjH9vrivtmMXmpeVIqUAU61YP2gtg';
+const token = response.credential;
 
 async function getSheetData(sheetName) {
     const token = localStorage.getItem('google_token');
