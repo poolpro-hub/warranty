@@ -26,6 +26,7 @@ if (status === null) {
             <td>${row[1]}</td>
             <td>${row[2]}</td>
             <td>${row[3]}</td>
+	    <td>${row[4]}</td>
 	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
         `;
         tr.addEventListener('click', () => {
@@ -41,6 +42,7 @@ if (status === null) {
             <td>${row[1]}</td>
             <td>${row[2]}</td>
             <td>${row[3]}</td>
+	    <td>${row[4]}</td>
 	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
         `;
         tr.addEventListener('click', () => {
