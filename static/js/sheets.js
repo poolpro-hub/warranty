@@ -3,6 +3,7 @@ const API_KEY = 'AIzaSyCbj_HkOkMr6nWfrBgGAVi08fjhyBZ9G4s';
 const SHEET_ID = '1ZGmhCzBU36_cpQzjH9vrivtmMXmpeVIqUAU61YP2gtg';
 const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values`;
 const SHEET_NAME = 'Pool Pro Live - Form Submissions';
+const token = response.credential;
 
 async function getSheetData(range) {
     const response = await fetch(`${BASE_URL}/${SHEET_NAME}?key=${API_KEY}`);
