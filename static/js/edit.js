@@ -1,3 +1,12 @@
+
+const token = localStorage.getItem('google_token');
+
+if (!token) {
+  alert('You must sign in first.');
+  window.location.href = 'index.html'; // or show sign-in prompt
+}
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const claimNumber = urlParams.get('claimNumber');
