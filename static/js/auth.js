@@ -4,7 +4,8 @@ function handleCredentialResponse(response) {
     const token = response.credential;
     localStorage.setItem('google_token', token);
     document.getElementById('signin-button').style.display = 'none';
-    alert('Signed in successfully!');
+    window.location.reload();
+    //alert('Signed in successfully!');
 }
 
 window.onload = function () {
