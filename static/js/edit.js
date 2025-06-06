@@ -1,86 +1,85 @@
-//const token = localStorage.getItem('google_token');
-
-if (!token) {
-  alert('You must sign in first.');
-  window.location.href = 'index.html'; // or show sign-in prompt
-}
-
-
+// js/edit.js
 document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const claimNumber = urlParams.get('claimNumber');
-    const editForm = document.getElementById('edit-form');
-    const data = await getSheetData('Pool Pro Live - Form Submissions');
-    const entry = data.find(row => row[0] === claimNumber);
-    const header1 = data[0];
+  const params = new URLSearchParams(window.location.search);
+  const claimNumber = params.get('claim');
+  const form = document.getElementById('edit-form');
 
+  if (!claimNumber) {
+    alert('No claim number provided.');
+    return;
+  }
 
-//    entry.forEach((value, index) => {
-//        const formGroup = document.createElement('div');
-//        formGroup.className = 'form-group';
-//        formGroup.innerHTML = `
-//            <label for="field-${index}">${header1[index]}</label>
-//            <input type="text" class="form-control" id="field-${index}" value="${value}">
-//        `;
-//        editForm.insertBefore(formGroup, editForm.lastElementChild);
-//    });
+  const { data, error } = await supabase
+    .from('warranty_requests')
+    .select('*')
+    .eq('ClaimNumber', claimNumber)
+    .single();
 
+  if (error || !data) {
+    alert('Error loading claim.');
+    return;
+  }
 
-    entry.forEach((header, index) => {
-        const value = entry[index] || '';
-        const formGroup = document.createElement('div');
-        formGroup.className = 'form-group';
+  const nonEditableFields = ['ClaimNumber', 'SubmissionDate'];
+  const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
 
-        const label = document.createElement('label');
-        label.setAttribute('for', header1[index]);
-        label.textContent = header1[index];
+  editableFields.forEach(field => {
+    const value = data[field] || '';
+    const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
 
-        const input = document.createElement('input');
-        input.className = 'form-control';
-        input.id = header1[index];
-        input.name = header1[index];
-        input.value = value;
-	    
-        // Make ClaimNumber read-only
-        if (header1[index] === 'ClaimNumber') {
-            input.readOnly = true;
-        }
+    const formGroup = document.createElement('div');
+    formGroup.className = 'col-md-6';
+    formGroup.innerHTML = `
+      <label for="${field}" class="form-label">${field}</label>
+      <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}">
+    `;
+    form.appendChild(formGroup);
+  });
 
-        // Make SubmissionDate read-only
-        if (header1[index] === 'SubmissionDate') {
-            input.setAttribute('type', 'date');
- 	        dateInsert = new Date(value);
-	        input.valueAsDate = dateInsert;
-        }
+  // Add hidden fields for non-editable values
+  nonEditableFields.forEach(field => {
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = field;
+    hidden.value = data[field];
+    form.appendChild(hidden);
+  });
 
-        // Make DateOfPurchase read-only
-        if (header1[index] === 'DateOfPurchase') {
-            input.setAttribute("type", "date");
-	    dateInsert = new Date(value);
-	    input.valueAsDate = dateInsert;
-        }
-	    
-        formGroup.appendChild(label);
-        formGroup.appendChild(input);
-        editForm.insertBefore(formGroup, editForm.lastElementChild);
-    });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    editForm.addEventListener('submit', async (event) => {
-	    const token = localStorage.getItem('google_token');
-	    if (!token) {
-	        alert('You must sign in with Google before editing.');
-	        window.location.href = 'index.html';
-	        return;
-	    }
-
-        event.preventDefault();
-        const updatedValues = Array.from(editForm.elements).map(input => input.value);
-	try {
-        	await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
-        	alert('Changes saved successfully!');
-	 } catch (error) {
-            alert('Failed to update. Please ensure you are signed in and authorized.');
-            console.error(error);
-        }   
+    const formData = new FormData(form);
+    const updated = {};
+    formData.forEach((value, key) => {
+      if (!nonEditableFields.includes(key)) {
+        updated[key] = value;
+      }
     });
+
+    const oldStatus = data.Status;
+    const newStatus = updated.Status;
+
+    const { error: updateError } = await supabase
+      .from('warranty_requests')
+      .update(updated)
+      .eq('ClaimNumber', claimNumber);
+
+    if (updateError) {
+      alert('Failed to update entry.');
+      return;
+    }
+
+    // Log status change
+    if (oldStatus !== newStatus) {
+      await supabase.from('status_logs').insert({
+        ClaimNumber: claimNumber,
+        OldStatus: oldStatus,
+        NewStatus: newStatus,
+        ChangedAt: new Date().toISOString()
+      });
+    }
+
+    alert('Warranty request updated.');
+    window.location.href = `list.html?status=${encodeURIComponent(newStatus)}`;
+  });
 });
