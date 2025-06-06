@@ -1,5 +1,5 @@
 
-const token = localStorage.getItem('google_token');
+//const token = localStorage.getItem('google_token');
 
 if (!token) {
   alert('You must sign in first.');
