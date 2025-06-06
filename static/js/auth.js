@@ -20,3 +20,5 @@ window.onload = function () {
     );
     google.accounts.id.prompt(); // Shows One Tap or auto sign-in
 };
+
+const token = localStorage.getItem('google_token');
