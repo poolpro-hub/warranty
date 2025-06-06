@@ -5,7 +5,7 @@ const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/valu
 const SHEET_NAME = 'Pool Pro Live - Form Submissions';
 //const token = handleCredentialResponse;
 
-const token = localStorage.getItem('google_token');
+//const token = localStorage.getItem('google_token');
 
 if (!token) {
   alert('You must sign in first.');
