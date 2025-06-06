@@ -5,6 +5,13 @@ const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/valu
 const SHEET_NAME = 'Pool Pro Live - Form Submissions';
 const token = handleCredentialResponse;
 
+const token = localStorage.getItem('google_token');
+
+if (!token) {
+  alert('You must sign in first.');
+  window.location.href = 'index.html'; // or show sign-in prompt
+}
+
 async function getSheetData(range) {
     const response = await fetch(`${BASE_URL}/${SHEET_NAME}?key=${API_KEY}`);
     const data = await response.json();
