@@ -1,62 +1,32 @@
-
-//const token = localStorage.getItem('google_token');
-
-if (!token) {
-  alert('You must sign in first.');
-  window.location.href = 'index.html'; // or show sign-in prompt
-}
-
-
+// js/list.js
 document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-    const statusTitle = document.getElementById('status-title');
-    const requestsTable = document.getElementById('requests-list');//.getElementsByTagName('tbody')[0];
-    const data = await getSheetData('Pool Pro Live - Form Submissions');
-    const filteredData = data.find(row => row[1] === status);
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
 
-console.log("Status param=");
-console.log(status);
+  document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
-    if (statusTitle) {
-        statusTitle.textContent = status;
-    } else {
-        console.error("Element with ID 'Status' not found.");
-    }
+  const { data, error } = await supabase
+    .from('warranty_requests')
+    .select('ClaimNumber, ClaimRequestedByShopName, NameOfEndUser, EquipmentType, SubmissionDate, Status')
+    .eq('Status', status)
+    .order('SubmissionDate', { ascending: false });
 
-//if (typeof status === "string" && status.length === 0){
-//    data.filter(row => row[1] === status).forEach(row => {
-if (status === null) {
-    data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-	    <td>${row[4]}</td>
-	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
-        `;
-        tr.addEventListener('click', () => {
-            window.location.href = `edit.html?claimNumber=${row[0]}`;
-        });
-        requestsTable.appendChild(tr);
-    });
-} else {
-    data.filter(row => row[1] === status).forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-	    <td>${row[4]}</td>
-	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
-        `;
-        tr.addEventListener('click', () => {
-            window.location.href = `edit.html?claimNumber=${row[0]}`;
-        });
-        requestsTable.appendChild(tr);
-    });
-};
+  if (error) {
+    console.error('Error fetching data:', error.message);
+    return;
+  }
+
+  const tbody = document.getElementById('requests-table-body');
+  data.forEach(entry => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><a href="edit.html?claim=${encodeURIComponent(entry.ClaimNumber)}">${entry.ClaimNumber}</a></td>
+      <td>${entry.ClaimRequestedByShopName || ''}</td>
+      <td>${entry.NameOfEndUser || ''}</td>
+      <td>${entry.EquipmentType || ''}</td>
+      <td>${entry.SubmissionDate ? new Date(entry.SubmissionDate).toLocaleDateString() : ''}</td>
+      <td>${entry.Status}</td>
+    `;
+    tbody.appendChild(row);
+  });
 });
