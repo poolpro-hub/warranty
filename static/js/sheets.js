@@ -12,6 +12,19 @@ async function getSheetData(range) {
 }
 
 
+async function updateSheetData(range, values) {
+    console.log(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ values })
+    });
+    const data = await response.json();
+    return data;
+}
 /*async function getSheetData(sheetName) {
     const token = localStorage.getItem('google_token');
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}`;
@@ -44,16 +57,3 @@ async function getSheetData(range) {
 } */
 
 
-async function updateSheetData(range, values) {
-    console.log(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`);
-    const response = await fetch(`${BASE_URL}/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ values })
-    });
-    const data = await response.json();
-    return data;
-}
