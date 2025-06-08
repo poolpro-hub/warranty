@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const { data, error } = await supabase
         .from('tblWarranty')
-        .select('claimNumber')
+        .select('*', { count: 'exact', head: true })
         .eq('Status', status);
 
       if (error) {
