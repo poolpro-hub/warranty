@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   for (const status of statuses) {
     try {
       const { data, error } = await supabase
-        .from('warranty_requests')
+        .from('tblWarranty')
         .select('ClaimNumber')
         .eq('Status', status);
 
