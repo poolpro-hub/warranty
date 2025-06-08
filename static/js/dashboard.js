@@ -5,15 +5,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   for (const status of statuses) {
     try {
-      const { count, error } = await supabase
+      const { data, error } = await supabase
         .from('warranty_requests')
-        .select('*', { count: 'exact', head: true })
+        .select('ClaimNumber')
         .eq('Status', status);
 
       if (error) {
         console.error(`Error fetching count for ${status}:`, error.message);
         continue;
       }
+
+      const count = data ? data.length : 0;
 
       const col = document.createElement('div');
       col.className = 'col-md-4 mb-4';
@@ -36,4 +38,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
-
