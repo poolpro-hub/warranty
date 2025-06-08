@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
   const { data, error } = await supabase
-    .from('warranty_requests')
+    .from('tblWarranty')
     .select('ClaimNumber, ClaimRequestedByShopName, NameOfEndUser, EquipmentType, SubmissionDate, Status')
     .eq('Status', status)
     .order('SubmissionDate', { ascending: false });
