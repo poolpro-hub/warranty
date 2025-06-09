@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         .ilike('status', status.trim());
 
       
-console.log(`Status: ${status}`, { data, error });
+console.log(`Querying status: ${status}`);
+console.log('Response:', { data, error });
+
 
 
       if (error) {
