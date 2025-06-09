@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const { data, error } = await supabase
         .from('tblWarranty')
         .select('*', { count: 'exact', head: true })
-        .eq('Status', status);
+        .ilike('Status', status.trim());
 
       if (error) {
         console.error(`Error fetching count for ${status}:`, error.message);
