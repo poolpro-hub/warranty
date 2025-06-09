@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const bkgpanel = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-dark'];
   const panelContainer = document.getElementById('status-panels');
-  const bkgcount = 0;
+  let bkgcount = 0;
 
   for (const status of statuses) {
     try {
@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
 
       panelContainer.appendChild(col);
+      // increment bkg count to move through the array
+      bkgcount++;
     } catch (err) {
       console.error(`Unexpected error for ${status}:`, err);
     }
