@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Log status change
     if (oldStatus !== newStatus) {
       await supabase.from('status_logs').insert({
-        ClaimNumber: claimNumber,
-        OldStatus: oldStatus,
-        NewStatus: newStatus,
-        ChangedAt: new Date().toISOString()
+        claimnumber: claimNumber,
+        oldstatus: oldStatus,
+        newstatus: newStatus,
+        changedat: new Date().toISOString()
       });
     }
 
