@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const { data, error } = await supabase
         .from('tblwarranty')
-        .select('*', { count: 'exact', head: true });
+        .select('*');
+//        .select('*', { count: 'exact', head: true });
 //        .ilike('status', status.trim());
 
 
@@ -15,14 +16,6 @@ console.log('Unfiltered data:', data);
       
 console.log(`Querying status: ${status}`);
 console.log('Response:', { data, error });
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data, error } = await supabase
-    .from('tbl_warranty')
-    .select('*');
-
-  console.log('Minimal query result:', { data, error });
-});
 
 
       if (error) {
