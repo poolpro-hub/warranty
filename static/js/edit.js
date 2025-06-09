@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const { data, error } = await supabase
-    .from('warrantyrequests')
+    .from('tblwarranty')
     .select('*')
     .ilike('claimnumber', claimNumber)
     .single();
