@@ -2,7 +2,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const claimNumber = params.get('claimnumber');
-  const form = document.getElementById('edit-form-div');
+  const formfields = document.getElementById('edit-form-div');
+  const form = document.getElementById('edit-form');
 
   console.log('claimnumber:', claimNumber);
 
