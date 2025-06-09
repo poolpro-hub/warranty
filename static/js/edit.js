@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const newStatus = updated.status;
 
     const { error: updateError } = await supabase
-      .from('warrantyrequests')
+      .from('tblwarranty')
       .update(updated)
       .eq('claimnumber', claimNumber);
 
