@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const nonEditableFields = ['claimnumber', 'submissiondate'];
+  const nonEditableFields = ['id', 'claimnumber', 'submissiondate'];
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
 
   editableFields.forEach(field => {
