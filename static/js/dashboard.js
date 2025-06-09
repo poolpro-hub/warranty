@@ -16,6 +16,13 @@ console.log('Unfiltered data:', data);
 console.log(`Querying status: ${status}`);
 console.log('Response:', { data, error });
 
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data, error } = await supabase
+    .from('tbl_warranty')
+    .select('*');
+
+  console.log('Minimal query result:', { data, error });
+});
 
 
       if (error) {
