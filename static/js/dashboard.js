@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   for (const status of statuses) {
     try {
       const { data, error } = await supabase
-        .from('tblWarranty')
+        .from('tblwarranty')
         .select('*', { count: 'exact', head: true })
-        .ilike('Status', status.trim());
+        .ilike('status', status.trim());
 
       
 console.log(`Status: ${status}`, { data, error });
