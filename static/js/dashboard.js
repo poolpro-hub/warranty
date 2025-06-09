@@ -1,6 +1,7 @@
 // js/dashboard.js
 document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
+  const bkgpanel = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-dark'];
   const panelContainer = document.getElementById('status-panels');
 
   for (const status of statuses) {
