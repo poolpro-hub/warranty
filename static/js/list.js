@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { data, error } = await supabase
     .from('tblwarranty')
     .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status')
-    .eq('Status', status)
-    .order('SubmissionDate', { ascending: false });
+    .eq('status', status)
+    .order('submissiondate', { ascending: false });
 
   if (error) {
     console.error('Error fetching data:', error.message);
