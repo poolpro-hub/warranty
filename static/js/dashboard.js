@@ -9,15 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         .from('tblwarranty')
         .select('claimnumber')
         .eq('status', status);
-//        .select('*', { count: 'exact', head: true });
-//        .ilike('status', status.trim());
-
-
-console.log('Unfiltered data:', data);
-      
-console.log(`Querying status: ${status}`);
-console.log('Response:', { data, error });
-
 
       if (error) {
         console.error(`Error fetching count for ${status}:`, error.message);
