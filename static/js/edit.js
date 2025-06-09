@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       .eq('claimnumber', claimNumber);
 
     if (updateError) {
+      console.log(updateError);
       alert('Failed to update entry.');
       return;
     }
