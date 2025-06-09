@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const claimNumber = params.get('claim');
   const form = document.getElementById('edit-form');
 
+  console.log('ClaimNumber:', claimNumber);
+
   if (!claimNumber) {
     alert('No claim number provided.');
     return;
