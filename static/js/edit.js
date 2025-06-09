@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const hidden = document.createElement('input');
     hidden.type = 'hidden';
     hidden.name = field;
+    hidden.id = field;
     hidden.value = data[field];
     form.appendChild(hidden);
   });
