@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+alert('Get there!');
     const formData = new FormData(form);
     const updated = {};
     formData.forEach((value, key) => {
