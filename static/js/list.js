@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
   const { data, error } = await supabase
-    .from('tblWarranty')
-    .select('claimNumber, ClaimRequestedByShopName, NameOfEndUser, EquipmentType, SubmissionDate, Status')
+    .from('tblwarranty')
+    .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status')
     .eq('Status', status)
     .order('SubmissionDate', { ascending: false });
 
@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><a href="edit.html?claim=${encodeURIComponent(entry.ClaimNumber)}">${entry.ClaimNumber}</a></td>
-      <td>${entry.ClaimRequestedByShopName || ''}</td>
-      <td>${entry.NameOfEndUser || ''}</td>
-      <td>${entry.EquipmentType || ''}</td>
-      <td>${entry.SubmissionDate ? new Date(entry.SubmissionDate).toLocaleDateString() : ''}</td>
-      <td>${entry.Status}</td>
+      <td>${entry.claimrequestedbyshopname || ''}</td>
+      <td>${entry.nameofenduser || ''}</td>
+      <td>${entry.equipmenttype || ''}</td>
+      <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString() : ''}</td>
+      <td>${entry.status}</td>
     `;
     tbody.appendChild(row);
   });
