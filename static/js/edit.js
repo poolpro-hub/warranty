@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { data, error } = await supabase
     .from('warrantyrequests')
     .select('*')
-    .eq('claimnumber', claimNumber)
+    .ilike('claimnumber', claimNumber)
     .single();
 
   if (error || !data) {
