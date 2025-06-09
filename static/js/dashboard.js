@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const bkgpanel = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-dark'];
   const panelContainer = document.getElementById('status-panels');
+  const bkgcount = 0;
 
   for (const status of statuses) {
     try {
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       col.className = 'col-md-4 mb-4';
 
       col.innerHTML = `
-        <div class="card text-white bg-primary h-100">
+        <div class="card text-white ${bkgpanel[bkgcount]} h-100">
           <div class="card-body">
             <h5 class="card-title">${status}</h5>
             <p class="card-text fs-3">${count}</p>
