@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   data.forEach(entry => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td><a href="edit.html?claim=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
+      <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
       <td>${entry.claimrequestedbyshopname || ''}</td>
       <td>${entry.nameofenduser || ''}</td>
       <td>${entry.equipmenttype || ''}</td>
