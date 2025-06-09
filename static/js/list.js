@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const { data, error } = await supabase
     .from('tblwarranty')
-    .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status')
+    .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status, infield')
     .eq('status', status)
     .order('submissiondate', { ascending: false });
 
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
+      <td>${entry.infield || ''}</td>
       <td>${entry.claimrequestedbyshopname || ''}</td>
       <td>${entry.nameofenduser || ''}</td>
       <td>${entry.equipmenttype || ''}</td>
