@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = 'login.html';
   }
 
+  
+  // Listen for auth state changes (logout, session expiry, etc.)
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (!session && !window.location.pathname.includes('login.html')) {
+      console.warn('Session expired or user logged out. Redirecting...');
+      window.location.href = 'login.html';
+    }
+  });
+
+
+  
   // Optional: logout button
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
