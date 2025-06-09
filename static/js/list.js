@@ -11,23 +11,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     .eq('status', status)
     .order('submissiondate', { ascending: false });
 
-  if (error) {
-    console.error('Error fetching data:', error.message);
-    return;
-  }
+    if (error) {
+      console.error('Error fetching data:', error.message);
+      return;
+    }
 
-  const tbody = document.getElementById('requests-table-body');
-  data.forEach(entry => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
-      <td>${entry.infield || ''}</td>
-      <td>${entry.claimrequestedbyshopname || ''}</td>
-      <td>${entry.nameofenduser || ''}</td>
-      <td>${entry.equipmenttype || ''}</td>
-      <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString() : ''}</td>
-      <td>${entry.status}</td>
-    `;
-    tbody.appendChild(row);
+    const tbody = document.getElementById('requests-table-body');
+    data.forEach(entry => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
+        <td>${entry.infield || ''}</td>
+        <td>${entry.claimrequestedbyshopname || ''}</td>
+        <td>${entry.nameofenduser || ''}</td>
+        <td>${entry.equipmenttype || ''}</td>
+        <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString() : ''}</td>
+        <td>${entry.status}</td>
+      `;
+      tbody.appendChild(row);
   });
 });
