@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const { data, error } = await supabase
-    .from('warranty_requests')
+    .from('warrantyrequests')
     .select('*')
-    .eq('ClaimNumber', claimNumber)
+    .eq('claimnumber', claimNumber)
     .single();
 
   if (error || !data) {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const nonEditableFields = ['ClaimNumber', 'SubmissionDate'];
+  const nonEditableFields = ['claimnumber', 'submissiondate'];
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
 
   editableFields.forEach(field => {
@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const newStatus = updated.Status;
 
     const { error: updateError } = await supabase
-      .from('warranty_requests')
+      .from('warrantyrequests')
       .update(updated)
-      .eq('ClaimNumber', claimNumber);
+      .eq('claimnumber', claimNumber);
 
     if (updateError) {
       alert('Failed to update entry.');
