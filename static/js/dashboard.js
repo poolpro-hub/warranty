@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         .select('*', { count: 'exact', head: true })
         .ilike('Status', status.trim());
 
+      
+console.log(`Status: ${status}`, { data, error });
+
+
       if (error) {
         console.error(`Error fetching count for ${status}:`, error.message);
         continue;
