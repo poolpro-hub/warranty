@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-    const oldStatus = data.Status;
-    const newStatus = updated.Status;
+    const oldStatus = data.status;
+    const newStatus = updated.status;
 
     const { error: updateError } = await supabase
       .from('warrantyrequests')
