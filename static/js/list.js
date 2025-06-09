@@ -3,9 +3,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const status = params.get('status');
 
-  document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
+  //document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
   if (status === null) {
+    document.getElementById('page-title').textContent = `Warranty Requests - All`;
     const { data, error } = await supabase
       .from('tblwarranty')
       .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status, infield')
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         tbody.appendChild(row);
       });
   } else {
+    document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
     const { data, error } = await supabase
       .from('tblwarranty')
       .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status, infield')
