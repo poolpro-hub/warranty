@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const { data, error } = await supabase
         .from('tblwarranty')
-        .select('*');
+        .select('claimnumber')
+        .eq('status', status);
 //        .select('*', { count: 'exact', head: true });
 //        .ilike('status', status.trim());
 
