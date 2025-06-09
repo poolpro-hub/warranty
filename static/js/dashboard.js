@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const { data, error } = await supabase
         .from('tblwarranty')
-        .select('*', { count: 'exact', head: true })
-        .ilike('status', status.trim());
+        .select('*', { count: 'exact', head: true });
+//        .ilike('status', status.trim());
 
+
+console.log('Unfiltered data:', data);
       
 console.log(`Querying status: ${status}`);
 console.log('Response:', { data, error });
