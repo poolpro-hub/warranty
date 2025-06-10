@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const nonEditableFields = ['id', 'created_at'];
-  const readOnlyFields = ['claimnumber', 'submissiondate']
+  const readOnlyFields = ['claimnumber', 'submissiondate', 'browsefiles', 'serialnumber']
   
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
 
