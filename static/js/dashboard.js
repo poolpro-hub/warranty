@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <p class="card-text fs-3">${count}</p>
           </div>
           <div class="card-footer bg-transparent border-top-0">
-            <a href="list.html?status=${encodeURIComponent(statusInfield)}" class="btn btn-light">View ${statusInfield}</a>
+            <a href="list.html?status=${encodeURIComponent(statusInfield)}&infield=Yes" class="btn btn-light">View ${statusInfield}</a>
           </div>
         </div>
       `;
