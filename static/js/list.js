@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const status = params.get('status');
+  const infield = params.get('infield');
 
   //document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
