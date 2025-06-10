@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     const formGroup = document.createElement('div');
-    if (field = 'descriptionofissue'){
+    if (field === 'descriptionofissue'){
       const inputType = "textarea";
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
