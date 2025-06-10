@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     const readOnlyFlag = '';
     const formGroup = document.createElement('div');
-    if (field === 'claimnumber'){readOnlyFlag = 'readonly'};
+    if (field === 'claimnumber'){const readOnlyFlag = 'readonly'};
     if (field !== 'descriptionofissue'){
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
