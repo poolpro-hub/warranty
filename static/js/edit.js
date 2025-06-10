@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
     if (field === 'claimnumber'){
-      const readOnlyFlag = "readonly";
+      var readOnlyFlag = "readonly";
     } else {
-      const readOnlyFlag = '';
+      var readOnlyFlag = '';
     };
     if (field !== 'descriptionofissue'){
       formGroup.className = 'col-md-6';
