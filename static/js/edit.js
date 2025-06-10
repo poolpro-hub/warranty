@@ -1,3 +1,31 @@
+function buildDropdown(options, selectedValue, containerId) {
+  let dropdownHTML = '<select>';
+  options.forEach(option => {
+    const isSelected = option.value === selectedValue;
+    dropdownHTML += `<option value="${option.value}" ${isSelected ? 'selected' : ''}>${option.text}</option>`;
+  });
+  dropdownHTML += '</select>';
+
+  const container = document.getElementById(containerId);
+  if(container) {
+    container.innerHTML = dropdownHTML;
+  }
+}
+
+// Example usage
+const dropdownOptions = [
+  { value: 'option1', text: 'Option 1' },
+  { value: 'option2', text: 'Option 2' },
+  { value: 'option3', text: 'Option 3' }
+];
+const selectedOption = 'option2'; // Set the desired selected value
+const containerId = 'dropdownContainer'; // ID of the container div
+
+buildDropdown(dropdownOptions, selectedOption, containerId);
+
+
+
+-----------------------------------------------------------------------------------
 // js/edit.js
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
@@ -39,18 +67,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       var readOnlyFlag = '';
     };
-    if (field !== 'descriptionofissue'){
-      formGroup.className = 'col-md-6';
-      formGroup.innerHTML = `
-        <label for="${field}" class="form-label">${field}</label>
-        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>
-      `;      
-    } else {
+    if (field === 'descriptionofissue'){
       const inputType = "textarea";
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
         <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">${value}</textarea>
+      `;      
+    } else if (field === 'status'{
+	let dropdownHTML = '<select>';
+  	statuses.forEach(option => {
+    		const isSelected = option === field;
+    		dropdownHTML += `<option class="form-control" id="${field}" value="${field}" ${isSelected ? 'selected' : ''}>${field}</option>`;
+  	});
+  	dropdownHTML += '</select>';
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+    } else {
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = `
+        <label for="${field}" class="form-label">${field}</label>
+        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
       `;
     };
     form.appendChild(formGroup);
