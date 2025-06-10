@@ -29,10 +29,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   editableFields.forEach(field => {
     const value = data[field] || '';
-    const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
+    //const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     const formGroup = document.createElement('div');
     if (field !== 'descriptionofissue'){
-      const inputType = "textarea";
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
@@ -41,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
 
       const formGroup = document.createElement('div');
+      const inputType = "textarea";
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
