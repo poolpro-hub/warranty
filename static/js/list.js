@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           <td>${entry.claimrequestedbyshopname || ''}</td>
           <td>${entry.nameofenduser || ''}</td>
           <td>${entry.equipmenttype || ''}</td>
-          <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString() : ''}</td>
-          <td>${entry.status}</td>
+          <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString('en-GB') : ''}</td>
+          <td><strong>${entry.status}</strong></td>
         `;
         tbody.appendChild(row);
       });
