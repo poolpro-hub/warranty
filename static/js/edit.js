@@ -32,10 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   editableFields.forEach(field => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
-    const readOnlyFlag = '';
+    //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
     if (field === 'claimnumber'){
       const readOnlyFlag = "readonly";
+    } else {
+      const readOnlyFlag = '';
     };
     if (field !== 'descriptionofissue'){
       formGroup.className = 'col-md-6';
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
-        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60"></textarea>
+        <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60"></textarea>
       `;
     };
     form.appendChild(formGroup);
