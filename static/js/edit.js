@@ -24,18 +24,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const nonEditableFields = ['id', 'claimnumber', 'submissiondate', 'created_at'];
+  const nonEditableFields = ['id', 'created_at'];
+  const readOnlyFields = ['claimnumber', 'submissiondate']
+  
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
 
   editableFields.forEach(field => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
+    const readOnlyFlag = '';
     const formGroup = document.createElement('div');
+    if (field === 'claimnumber'){readOnlyFlag = 'readonly'};
     if (field !== 'descriptionofissue'){
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
-        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}">
+        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>
       `;      
     } else {
       const inputType = "textarea";
