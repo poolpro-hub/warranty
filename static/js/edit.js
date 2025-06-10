@@ -30,17 +30,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   editableFields.forEach(field => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
-    if (field = 'descriptionofissue'){
-      console.log(field);
-      const inputType = "textarea";
-    }
-
     const formGroup = document.createElement('div');
-    formGroup.className = 'col-md-6';
-    formGroup.innerHTML = `
-      <label for="${field}" class="form-label">${field}</label>
-      <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}">
-    `;
+    if (field = 'descriptionofissue'){
+      const inputType = "textarea";
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = `
+        <label for="${field}" class="form-label">${field}</label>
+        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">
+      `;      
+    } else {
+
+      const formGroup = document.createElement('div');
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = `
+        <label for="${field}" class="form-label">${field}</label>
+        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}">
+      `;
+    };
     form.appendChild(formGroup);
   });
 
