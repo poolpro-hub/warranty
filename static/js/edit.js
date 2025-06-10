@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   editableFields.forEach(field => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
+    if (field = "descriptionofissue"){
+      inputType = "textarea";
+    }
 
     const formGroup = document.createElement('div');
     formGroup.className = 'col-md-6';
