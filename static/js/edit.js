@@ -1,31 +1,3 @@
-function buildDropdown(options, selectedValue, containerId) {
-  let dropdownHTML = '<select>';
-  options.forEach(option => {
-    const isSelected = option.value === selectedValue;
-    dropdownHTML += `<option value="${option.value}" ${isSelected ? 'selected' : ''}>${option.text}</option>`;
-  });
-  dropdownHTML += '</select>';
-
-  const container = document.getElementById(containerId);
-  if(container) {
-    container.innerHTML = dropdownHTML;
-  }
-}
-
-// Example usage
-const dropdownOptions = [
-  { value: 'option1', text: 'Option 1' },
-  { value: 'option2', text: 'Option 2' },
-  { value: 'option3', text: 'Option 3' }
-];
-const selectedOption = 'option2'; // Set the desired selected value
-const containerId = 'dropdownContainer'; // ID of the container div
-
-buildDropdown(dropdownOptions, selectedOption, containerId);
-
-
-
------------------------------------------------------------------------------------
 // js/edit.js
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
