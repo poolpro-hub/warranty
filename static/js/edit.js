@@ -86,8 +86,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         updated[key] = value;
       }
 	    console.log(Object.fromEntries(formData));
-	    alert('HALT');
     });
+
+	alert('HALT ',data.status);  
 
     const oldStatus = data.status;
     const newStatus = updated.status;
