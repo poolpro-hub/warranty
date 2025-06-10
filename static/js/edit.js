@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
-    if (field === 'claimnumber'){
+    if (field === 'claimnumber' || field === 'submissiondate'){
       var readOnlyFlag = "readonly";
     } else {
       var readOnlyFlag = '';
