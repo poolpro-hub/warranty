@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   editableFields.forEach(field => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
-    if (field = "descriptionofissue"){
+    if (field = 'descriptionofissue'){
       console.log(field);
-      //inputType = "textarea";
+      const inputType = "textarea";
     }
 
     const formGroup = document.createElement('div');
