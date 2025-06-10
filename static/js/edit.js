@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <label for="${field}" class="form-label">${field}</label>
         <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">${value}</textarea>
       `;      
-    } else if (field === 'status'{
-	let dropdownHTML = '<select>';
+    } else if (field === 'status'){
+	let dropdownHTML = '<label for="${field}" class="form-label">${field}</label><select>';
   	statuses.forEach(option => {
     		const isSelected = option === field;
     		dropdownHTML += `<option class="form-control" id="${field}" value="${field}" ${isSelected ? 'selected' : ''}>${field}</option>`;
