@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  let bkgcountInfield = 1;
+  let bkgcountInfield = 0;
   
   for (const statusInfield of statusesInfield) {
     try {
