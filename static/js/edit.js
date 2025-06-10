@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!nonEditableFields.includes(key)) {
         updated[key] = value;
       }
+	    console.log(Object.fromEntries(formData));
+	    alert('HALT');
     });
 
     const oldStatus = data.status;
