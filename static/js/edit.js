@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const value = data[field] || '';
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     if (field = "descriptionofissue"){
-      inputType = "textarea";
+      console.log(field);
+      //inputType = "textarea";
     }
 
     const formGroup = document.createElement('div');
