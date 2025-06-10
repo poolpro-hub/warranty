@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}">
       `;      
     } else {
-
-      const formGroup = document.createElement('div');
       const inputType = "textarea";
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
