@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  let bkgcount = 1;
+  let bkgcountInfield = 1;
   
   for (const statusInfield of statusesInfield) {
     try {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       col.className = 'col-md-4 mb-4';
 
       col.innerHTML = `
-        <div class="card text-white ${bkgpanel[bkgcount]} h-100">
+        <div class="card text-white ${bkgpanel[bkgcountInfield]} h-100">
           <div class="card-body">
             <h5 class="card-title">${statusInfield}</h5>
             <p class="card-text fs-3">${count}</p>
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       panelContainerInfield.appendChild(col);
       // increment bkg count to move through the array
-      bkgcount++;
+      bkgcountInfield++;
     } catch (err) {
       console.error(`Unexpected error for ${status}:`, err);
     }
