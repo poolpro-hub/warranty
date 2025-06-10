@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">${value}</textarea>
       `;      
     } else if (field === 'status'){
-	let dropdownHTML = '<label for="${field}" class="form-label">${field}</label><select>';
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>/n<select class="form-control" id="${field}">`;
   	statuses.forEach(option => {
     		const isSelected = option === field;
-    		dropdownHTML += `<option class="form-control" id="${field}" value="${field}" ${isSelected ? 'selected' : ''}>${field}</option>`;
+    		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += '</select>';
       formGroup.className = 'col-md-6';
