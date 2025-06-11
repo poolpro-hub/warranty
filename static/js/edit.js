@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-	dropdownHTML += `<input type="hidden" name="status" id="status" value="${option}">`;
+	dropdownHTML += `<input type="hidden" name="status" id="status" value="${value}">`;
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
       // Add hidden status field
