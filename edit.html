@@ -52,10 +52,10 @@
   </div>
 
   <script>
-		document.getElementById('status-change').addEventListener('change', function() {
-  			var selectedValue = this.value; // Get the selected value from the dropdown
- 			document.getElementById('status').value = selectedValue; // Update the textbox value
-		});
+	  function updateTextbox(value) {
+	    document.getElementById('myTextbox').value = value;
+	  }
+
   </script>
 </body>
 </html>
