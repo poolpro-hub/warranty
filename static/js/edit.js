@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const updated = {};
     formData.forEach((value, key) => {
       if (!nonEditableFields.includes(key)) {
-        updated[key] = value;
+        updated[key].value = value;
       }
 	    //console.log(value);
     });
