@@ -11,13 +11,7 @@
   <script src="static/js/auth.js"></script>
   <script src="static/js/edit.js"></script>	
   <link rel='stylesheet' href="static/css/styles.css" type='text/css' media='all' />
-  <script>
-	  
-		document.getElementById('status-change').addEventListener('change', function() {
-  			var selectedValue = this.value; // Get the selected value from the dropdown
- 		document.getElementById('status').value = selectedValue; // Update the textbox value
-		});
-  </script>
+
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -57,6 +51,11 @@
     </form>
   </div>
 
-
+  <script>
+		document.getElementById('status-change').addEventListener('change', function() {
+  			var selectedValue = this.value; // Get the selected value from the dropdown
+ 			document.getElementById('status').value = selectedValue; // Update the textbox value
+		});
+  </script>
 </body>
 </html>
