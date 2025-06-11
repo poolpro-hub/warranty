@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const nonEditableFields = ['id', 'created_at', 'status'];
+  const nonEditableFields = ['id', 'created_at'];
   const readOnlyFields = ['claimnumber', 'submissiondate', 'browsefiles', 'serialnumber']
   
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
@@ -54,8 +54,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += '</select>';
+	dropdownHTML += '<input type="hidden" name="status" id="status" value="${option}">';
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
+      // Add hidden status field
+      
     } else {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
