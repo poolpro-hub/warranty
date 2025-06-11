@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const nonEditableFields = ['id', 'created_at'];
+  const nonEditableFields = ['id', 'created_at', 'status'];
   const readOnlyFields = ['claimnumber', 'submissiondate', 'browsefiles', 'serialnumber']
   
   const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;      
     } else if (field === 'status'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
- 	dropdownHTML += `<select class="form-control" id="${field}">`;
+ 	dropdownHTML += `<select class="form-control" id="${field}-change">`;
   	statuses.forEach(option => {
     		const isSelected = option === value;
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
