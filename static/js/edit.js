@@ -48,13 +48,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;      
     } else if (field === 'status'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
- 	dropdownHTML += `<select class="form-control" id="${field}-change" onchange="updateTextbox(this.value)">`;
+ 	dropdownHTML += `<select class="form-control" id="${field}" name="${field}" onchange="updateTextbox(this.value)">`;
   	statuses.forEach(option => {
     		const isSelected = option === value;
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-	dropdownHTML += `<input type="hidden" name="status" id="status" value="${value}">`;
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
       // Add hidden status field
