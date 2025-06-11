@@ -6,12 +6,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('edit-form');
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
 
-
-document.getElementById('status-change').addEventListener('change', function() {
-  var selectedValue = this.value; // Get the selected value from the dropdown
-  document.getElementById('status').value = selectedValue; // Update the textbox value
-});
-	
   console.log('claimnumber:', claimNumber);
 
   if (!claimNumber) {
@@ -90,9 +84,6 @@ document.getElementById('status-change').addEventListener('change', function() {
     formData.forEach((value, key) => {
       if (!nonEditableFields.includes(key)) {
         updated[key] = value;
-	      if (updated[key] === 'status'){
-		      alert('Status Reached');
-	      };
       }
 	    //console.log(value);
     });
