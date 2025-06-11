@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;      
     } else if (field === 'status'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
- 	dropdownHTML += `<select class="form-control" id="${field}-change">`;
+ 	dropdownHTML += `<select class="form-control" id="${field}-change" onchange="updateTextbox(this.value)">`;
   	statuses.forEach(option => {
     		const isSelected = option === value;
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
