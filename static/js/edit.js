@@ -83,7 +83,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const updated = {};
     formData.forEach((value, key) => {
       if (!nonEditableFields.includes(key)) {
-        updated[key].value = value;
+        updated[key] = value;
+	      if (updated[key] === 1){
+		      alert('Position 1 Reached');
+	      };
       }
 	    //console.log(value);
     });
