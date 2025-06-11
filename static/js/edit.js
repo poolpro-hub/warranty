@@ -85,13 +85,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!nonEditableFields.includes(key)) {
         updated[key] = value;
       }
-	    console.log(value);
+	    //console.log(value);
     });
 
-	alert('HALT ',data.status);  
+	//alert('HALT ',data.status);  
 
     const oldStatus = data.status;
     const newStatus = updated.status;
+	  alert(oldStatus);
+	  alert(newStatus);
 
     const { error: updateError } = await supabase
       .from('tblwarranty')
