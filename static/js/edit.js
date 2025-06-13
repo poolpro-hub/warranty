@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
       `;
     };
-    form.appendChild(formGroup);
+    formfields.appendChild(formGroup);
   });
 
 	
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     hidden.name = field;
     hidden.id = field;
     hidden.value = data[field];
-    form.appendChild(hidden);
+    formfields.appendChild(hidden);
   });
 
 
