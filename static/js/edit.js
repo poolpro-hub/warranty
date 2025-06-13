@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     if (field === 'infield') {
-	formfields.insertBefore(formGroup);
+	formfields.insertBefore(formfields.firstChild);
     } else {
     	formfields.appendChild(formGroup);
     };
