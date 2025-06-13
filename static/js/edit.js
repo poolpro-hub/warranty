@@ -93,9 +93,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	//Validate fields
 	  if (key === 'dateofpurchase'){
 		console.log('Dateofpurchase:');
-		  console.log(value);
-	  };      
-        updated[key] = value;
+		console.log(value);
+		updated[key] = 'null';
+	  } else {      
+        	updated[key] = value;
+	  };
       }
 	    //console.log(value);
     });
