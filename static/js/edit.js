@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const formfields = document.getElementById('edit-form-div');
   const form = document.getElementById('edit-form');
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
+  const yesno = ['Yes', 'No'];
 
   console.log('claimnumber:', claimNumber);
 
@@ -58,8 +59,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   	dropdownHTML += `</select>`;
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
-      // Add hidden status field
       
+    } else if (field === 'infield'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
+ 	dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+  	yesno.forEach(option => {
+    		const isSelected = option === value;
+    		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+  	});
+  	dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+     
+            
     } else {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
