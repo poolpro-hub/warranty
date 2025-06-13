@@ -78,7 +78,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
       `;
     };
-    formfields.appendChild(formGroup);
+
+    if (field === 'infield') {
+	formfields.insertBefore(formGroup);
+    } else {
+    	formfields.appendChild(formGroup);
+    };
   });
 
 	
