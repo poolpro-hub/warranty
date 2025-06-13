@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     form.appendChild(formGroup);
   });
-  formGroup.innerHTML = ` `;
+  formGroup.innerHTML = `<button id="logout-btn" class="btn btn-outline-danger">Logout</button>`;
   form.appendChild(formGroup);
 	
   // Add hidden fields for non-editable values
