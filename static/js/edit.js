@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const formfields = document.getElementById('edit-form-div');
   const form = document.getElementById('edit-form');
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
-  const yesno = ['Yes', 'No'];
+  const yesno = ['No', 'Yes'];
 
   console.log('claimnumber:', claimNumber);
 
