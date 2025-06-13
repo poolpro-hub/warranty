@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     form.appendChild(formGroup);
   });
-
+  formGroup.innerHTML = ` `;
+  form.appendChild(formGroup);
+	
   // Add hidden fields for non-editable values
   nonEditableFields.forEach(field => {
     const hidden = document.createElement('input');
