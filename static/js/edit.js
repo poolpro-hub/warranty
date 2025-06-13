@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
+
+	//Validate fields
+	  if (field === 'dateofpurchase'){
+		console.log('Dateofpurchase:');
+		  console.log(value);
+	  };
+	  
     if (field === 'claimnumber' || field === 'submissiondate'){
       var readOnlyFlag = "readonly";
     } else {
@@ -94,8 +101,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const oldStatus = data.status;
     const newStatus = updated.status;
-	  alert(oldStatus);
-	  alert(newStatus);
+	  //alert(oldStatus);
+	  //alert(newStatus);
 
     const { error: updateError } = await supabase
       .from('tblwarranty')
