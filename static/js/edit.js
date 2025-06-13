@@ -35,11 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
 
-	//Validate fields
-	  if (field === 'dateofpurchase'){
-		console.log('Dateofpurchase:');
-		  console.log(value);
-	  };
 	  
     if (field === 'claimnumber' || field === 'submissiondate'){
       var readOnlyFlag = "readonly";
@@ -85,6 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     form.appendChild(hidden);
   });
 
+
+// Save process	
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -92,6 +89,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const updated = {};
     formData.forEach((value, key) => {
       if (!nonEditableFields.includes(key)) {
+	
+	//Validate fields
+	  if (key === 'dateofpurchase'){
+		console.log('Dateofpurchase:');
+		  console.log(value);
+	  };      
         updated[key] = value;
       }
 	    //console.log(value);
@@ -101,8 +104,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const oldStatus = data.status;
     const newStatus = updated.status;
-	  //alert(oldStatus);
-	  //alert(newStatus);
 
     const { error: updateError } = await supabase
       .from('tblwarranty')
