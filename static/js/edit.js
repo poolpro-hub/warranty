@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	  if (key === 'dateofpurchase'){
 		console.log('Dateofpurchase:');
 		console.log(value);
-		updated[key] = 'null';
+		updated[key] = new Date(0);
 	  } else {      
         	updated[key] = value;
 	  };
