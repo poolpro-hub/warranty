@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     if (field === 'descriptionofissue'){
       const inputType = "textarea";
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
         <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">${value}</textarea>
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12';
       formGroup.innerHTML = dropdownHTML;
       
     } else if (field === 'infield'){
@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12';
       formGroup.innerHTML = dropdownHTML;
      
             
     } else {
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
         <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
