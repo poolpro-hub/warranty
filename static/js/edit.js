@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formGroup = document.createElement('div');
 
   // Add readonly to the listed fields
-  var readOnlyFlag = '';	  
+	  
   readOnlyFields.forEach(field => {
     var readOnlyFlag = "readonly";
   });
@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
     	formfields.appendChild(formGroup);
     };
+  var readOnlyFlag = '';
   });
 
 	
