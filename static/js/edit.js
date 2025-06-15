@@ -35,12 +35,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
     //const readOnlyFlag = '';
     const formGroup = document.createElement('div');
+
+  // Add readonly to the listed fields
+  var readOnlyFlag = '';	  
+  readOnlyFields.forEach(field => {
+    var readOnlyFlag = "readonly";
+  });
 	  
-    if (field === 'claimnumber' || field === 'submissiondate'){
-      var readOnlyFlag = "readonly";
-    } else {
-      var readOnlyFlag = '';
-    };
+//    if (field === 'claimnumber' || field === 'submissiondate'){
+//      var readOnlyFlag = "readonly";
+//    } else {
+//      var readOnlyFlag = '';
+//    };
     if (field === 'descriptionofissue'){
       const inputType = "textarea";
       formGroup.className = 'col-md-12';
