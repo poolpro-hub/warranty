@@ -38,15 +38,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Add readonly to the listed fields
 	  
-  readOnlyFields.forEach(field => {
-    var readOnlyFlag = "readonly";
-  });
+    if (field === 'claimnumber' || field === 'submissiondate' || field === 'browsefiles' || field === 'serialnumber'){
+      var readOnlyFlag = "readonly";
+    } else {
+      var readOnlyFlag = '';
+    };
 	  
-//    if (field === 'claimnumber' || field === 'submissiondate'){
-//      var readOnlyFlag = "readonly";
-//    } else {
-//      var readOnlyFlag = '';
-//    };
     if (field === 'descriptionofissue'){
       const inputType = "textarea";
       formGroup.className = 'col-md-12';
