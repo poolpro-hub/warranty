@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const statusesInfield = ['New', 'Progress', 'Complete'];
+  const statusesReports = ['Complete'];
   const bkgpanel = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-dark'];
   const panelContainer = document.getElementById('status-panels');
   const panelContainerInfield = document.getElementById('status-panels-infield');
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
 // Reporting panels
-  for (const statusreport of statuses) {
+  for (const statusreport of statusesReports) {
     try {
       const { data, error } = await supabase
         .from('tblwarranty')
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       col.innerHTML = `
         <div class="card text-white ${bkgpanel[bkgcountInfield]} h-100">
           <div class="card-body">
-            <h5 class="card-title">${statusreport} Infield</h5>
+            <h5 class="card-title">${statusreport}</h5>
             <p class="card-text fs-3">${count}</p>
           </div>
           <div class="card-footer bg-transparent border-top-0">
