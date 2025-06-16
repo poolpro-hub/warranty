@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       col.innerHTML = `
         <div class="card text-white ${bkgpanel[bkgcountInfield]} h-100">
           <div class="card-body">
-            <h5 class="card-title">${statusreport}</h5>
+            <h5 class="card-title">${statusreport} - Last 7 Days</h5>
             <p class="card-text fs-3">${count}</p>
           </div>
           <div class="card-footer bg-transparent border-top-0">
