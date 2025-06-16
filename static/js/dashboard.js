@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const bkgpanel = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-dark'];
   const panelContainer = document.getElementById('status-panels');
   const panelContainerInfield = document.getElementById('status-panels-infield');
+  const panelContainerReports = document.getElementById('status-panels-reports');
   let bkgcount = 0;
 
   for (const status of statuses) {
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   let bkgcountInfield = 0;
-  
+  // Infield panels
   for (const statusInfield of statusesInfield) {
     try {
       const { data, error } = await supabase
@@ -77,6 +78,45 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
 
       panelContainerInfield.appendChild(col);
+      // increment bkg count to move through the array
+      bkgcountInfield++;
+    } catch (err) {
+      console.error(`Unexpected error for ${status}:`, err);
+    }
+  }
+
+// Reporting panels
+  for (const statusreport of statuses) {
+    try {
+      const { data, error } = await supabase
+        .from('tblwarranty')
+        .select('claimnumber')
+        .eq('status', statusreport)
+        .eq('infield', 'Yes');
+
+      if (error) {
+        console.error(`Error fetching count for ${statusreport}:`, error.message);
+        continue;
+      }
+
+      const count = data ? data.length : 0;
+
+      const col = document.createElement('div');
+      col.className = 'col-md-4 mb-4';
+
+      col.innerHTML = `
+        <div class="card text-white ${bkgpanel[bkgcountInfield]} h-100">
+          <div class="card-body">
+            <h5 class="card-title">${statusreport} Infield</h5>
+            <p class="card-text fs-3">${count}</p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <a href="list.html?status=${encodeURIComponent(statusreport)}" class="btn btn-light">View ${statusreport}</a>
+          </div>
+        </div>
+      `;
+
+      panelContainerReports.appendChild(col);
       // increment bkg count to move through the array
       bkgcountInfield++;
     } catch (err) {
