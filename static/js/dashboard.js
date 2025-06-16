@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const panelContainerReports = document.getElementById('status-panels-reports');
   let bkgcount = 0;
 
+  // Create a date that is 7 days ago
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const sevenDaysAgoISO = sevenDaysAgo.toISOString();
+
   for (const status of statuses) {
     try {
       const { data, error } = await supabase
@@ -92,7 +97,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const { data, error } = await supabase
         .from('status_logs')
         .select('newstatus')
-        .eq('newstatus', statusreport);
+        .eq('newstatus', statusreport)
+        .gt('changedat', sevenDaysAgoISO);
 
       if (error) {
         console.error(`Error fetching count for ${statusreport}:`, error.message);
