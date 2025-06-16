@@ -113,8 +113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	
 	//Validate fields
 	  if (key === 'dateofpurchase'){
-		console.log('Dateofpurchase:');
-		console.log(value);
+		//console.log('Dateofpurchase:');
+		//console.log(value);
 		updated[key] = new Date(0);
 	  } else {      
         	updated[key] = value;
@@ -127,6 +127,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const oldStatus = data.status;
     const newStatus = updated.status;
+
+    if (newStatus === "complete"){
+	    if (oldStatus !== newStatus){
+		    updated['completedate'] = new Date(0);
+	    };
+    };
 
     const { error: updateError } = await supabase
       .from('tblwarranty')
