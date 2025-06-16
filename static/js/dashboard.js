@@ -90,10 +90,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   for (const statusreport of statusesReports) {
     try {
       const { data, error } = await supabase
-        .from('tblwarranty')
-        .select('claimnumber')
-        .eq('status', statusreport)
-        .eq('infield', 'Yes');
+        .from('status_logs')
+        .select('newstatus')
+        .eq('newstatus', statusreport);
 
       if (error) {
         console.error(`Error fetching count for ${statusreport}:`, error.message);
