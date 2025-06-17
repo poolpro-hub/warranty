@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-12';
+      formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
       
     } else if (field === 'infield'){
@@ -70,12 +70,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-12';
+      formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
      
             
     } else {
-      formGroup.className = 'col-md-12';
+      formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
         <label for="${field}" class="form-label">${field}</label>
         <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
