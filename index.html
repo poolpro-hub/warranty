@@ -74,8 +74,24 @@
       <!-- Report panels will be injected here -->
     </div>
   </div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+	<!-- Trigger Button -->
+	<button id="viewLogsBtn" class="btn btn-info">View Status Logs</button>
+  </div>
+  
+	<!-- Modal -->
+	<div id="statusLogsModal" class="modal" style="display:none;">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <h4>Status Logs</h4>
+	    <ul id="logsList"></ul>
+	  </div>
+	</div>
+
   <script src="static/js/supabaseClient.js" defer></script>
   <script src="static/js/auth.js" defer></script>
   <script src="static/js/dashboard.js" defer></script>
+  <script src="static/js/modal.js" defer></script>
 </body>
 </html>
