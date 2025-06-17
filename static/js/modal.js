@@ -6,6 +6,7 @@ document.getElementById('viewLogsBtn').addEventListener('click', async () => {
   const { data, error } = await supabase
     .from('status_logs')
     .select('*')
+	.eq('newstatus', 'Complete')
     .order('changedat', { ascending: false })
     .limit(20);
 
