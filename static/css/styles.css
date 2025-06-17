@@ -30,3 +30,7 @@ body {
   cursor: pointer;
 }
 
+#statusLogsModal {
+	padding: 25px;
+}
+
