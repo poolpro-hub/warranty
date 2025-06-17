@@ -16,7 +16,7 @@ document.getElementById('viewLogsBtn').addEventListener('click', async () => {
   } else {
     data.forEach(log => {
       const item = document.createElement('li');
-      item.textContent = `Claim: ${log.claimnumber || 'N/A'}, Status: ${log.newstatus}, Changed: ${new Date(log.changedat).toLocaleString()}`;
+      item.textContent = `Claim: <a href="edit.html?claimnumber=${log.claimnumber || 'N/A'}">${log.claimnumber || 'N/A'}</a> | Status: ${log.newstatus} | Changed: ${new Date(log.changedat).toLocaleString()}`;
       logsList.appendChild(item);
     });
   }
