@@ -36,14 +36,6 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 id="page-title">Warranty Requests</h2>
     </div>
-	<div class="d-flex justify-content-between align-items-center mb-3">
-	  <div>
-		<input type="text" id="searchInput" class="form-control" placeholder="Search..." />
-	  </div>
-	  <div>
-		<button id="exportBtn" class="btn btn-outline-primary">Export to CSV</button>
-	  </div>
-	</div>
 
     <table class="table table-bordered table-hover">
       <thead class="table-light">
@@ -61,23 +53,6 @@
         <!-- Rows will be injected here -->
       </tbody>
     </table>
-	<div class="d-flex justify-content-between align-items-center mt-3">
-	  <div>
-		<label for="rowsPerPage">Rows per page:</label>
-		<select id="rowsPerPage" class="form-select d-inline-block w-auto ms-2">
-		  <option value="5">5</option>
-		  <option value="10" selected>10</option>
-		  <option value="25">25</option>
-		  <option value="50">50</option>
-		</select>
-	  </div>
-	  <div>
-		<button id="prevPage" class="btn btn-secondary btn-sm me-2">Previous</button>
-		<span id="pageInfo">Page 1</span>
-		<button id="nextPage" class="btn btn-secondary btn-sm ms-2">Next</button>
-	  </div>
-	</div>
-	
   </div>
 
 
