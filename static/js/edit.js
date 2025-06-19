@@ -1,86 +1,165 @@
-//const token = localStorage.getItem('google_token');
-
-if (!token) {
-  alert('You must sign in first.');
-  window.location.href = 'index.html'; // or show sign-in prompt
-}
-
-
+// js/edit.js
 document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const claimNumber = urlParams.get('claimNumber');
-    const editForm = document.getElementById('edit-form');
-    const data = await getSheetData('Pool Pro Live - Form Submissions');
-    const entry = data.find(row => row[0] === claimNumber);
-    const header1 = data[0];
+  const params = new URLSearchParams(window.location.search);
+  const claimNumber = params.get('claimnumber');
+  const formfields = document.getElementById('edit-form-div');
+  const form = document.getElementById('edit-form');
+  const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
+  const yesno = ['No', 'Yes'];
+
+  console.log('claimnumber:', claimNumber);
+
+  if (!claimNumber) {
+    alert('No claim number provided.');
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('tblwarranty')
+    .select('*')
+    .ilike('claimnumber', claimNumber)
+    .single();
+
+  if (error || !data) {
+    alert('Error loading claim.');
+    return;
+  }
+
+  const nonEditableFields = ['id', 'created_at'];
+  const readOnlyFields = ['claimnumber', 'submissiondate', 'browsefiles', 'serialnumber']
+  
+  const editableFields = Object.keys(data).filter(f => !nonEditableFields.includes(f));
+
+  editableFields.forEach(field => {
+    const value = data[field] || '';
+    const inputType = field.toLowerCase().includes('date') ? 'date' : 'text';
+    //const readOnlyFlag = '';
+    const formGroup = document.createElement('div');
+
+  // Add readonly to the listed fields
+	  
+    if (field === 'claimnumber' || field === 'submissiondate' || field === 'browsefiles' || field === 'serialnumber'){
+      var readOnlyFlag = "readonly";
+    } else {
+      var readOnlyFlag = '';
+    };
+	  
+    if (field === 'descriptionofissue'){
+      const inputType = "textarea";
+      formGroup.className = 'col-md-12';
+      formGroup.innerHTML = `
+        <label for="${field}" class="form-label">${field}</label>
+        <textarea type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" rows="10" cols="60">${value}</textarea>
+      `;      
+    } else if (field === 'status'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
+ 	dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+  	statuses.forEach(option => {
+    		const isSelected = option === value;
+    		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+  	});
+  	dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+      
+    } else if (field === 'infield'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
+ 	dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+  	yesno.forEach(option => {
+    		const isSelected = option === value;
+    		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+  	});
+  	dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+     
+    } else if (field === 'completedate'){  
+	    //Do not render this input field
+		formGroup.className = 'col-md-6';
+      		formGroup.innerHTML = `${value}      
+      		`;	    
+    } else {
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = `
+        <label for="${field}" class="form-label">${field}</label>
+        <input type="${inputType}" class="form-control" id="${field}" name="${field}" value="${value}" ${readOnlyFlag}>        
+      `;
+    };
+
+    if (field === 'infield') {
+	formfields.insertBefore(formGroup, formfields.firstChild);
+    } else {
+    	formfields.appendChild(formGroup);
+    };
+  var readOnlyFlag = '';
+  });
+
+	
+  // Add hidden fields for non-editable values
+  nonEditableFields.forEach(field => {
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = field;
+    hidden.id = field;
+    hidden.value = data[field];
+    formfields.appendChild(hidden);
+  });
 
 
-//    entry.forEach((value, index) => {
-//        const formGroup = document.createElement('div');
-//        formGroup.className = 'form-group';
-//        formGroup.innerHTML = `
-//            <label for="field-${index}">${header1[index]}</label>
-//            <input type="text" class="form-control" id="field-${index}" value="${value}">
-//        `;
-//        editForm.insertBefore(formGroup, editForm.lastElementChild);
-//    });
+// Save process	
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-
-    entry.forEach((header, index) => {
-        const value = entry[index] || '';
-        const formGroup = document.createElement('div');
-        formGroup.className = 'form-group';
-
-        const label = document.createElement('label');
-        label.setAttribute('for', header1[index]);
-        label.textContent = header1[index];
-
-        const input = document.createElement('input');
-        input.className = 'form-control';
-        input.id = header1[index];
-        input.name = header1[index];
-        input.value = value;
-	    
-        // Make ClaimNumber read-only
-        if (header1[index] === 'ClaimNumber') {
-            input.readOnly = true;
-        }
-
-        // Make SubmissionDate read-only
-        if (header1[index] === 'SubmissionDate') {
-            input.setAttribute('type', 'date');
- 	        dateInsert = new Date(value);
-	        input.valueAsDate = dateInsert;
-        }
-
-        // Make DateOfPurchase read-only
-        if (header1[index] === 'DateOfPurchase') {
-            input.setAttribute("type", "date");
-	    dateInsert = new Date(value);
-	    input.valueAsDate = dateInsert;
-        }
-	    
-        formGroup.appendChild(label);
-        formGroup.appendChild(input);
-        editForm.insertBefore(formGroup, editForm.lastElementChild);
-    });
-
-    editForm.addEventListener('submit', async (event) => {
-	    const token = localStorage.getItem('google_token');
-	    if (!token) {
-	        alert('You must sign in with Google before editing.');
-	        window.location.href = 'index.html';
-	        return;
-	    }
-
-        event.preventDefault();
-        const updatedValues = Array.from(editForm.elements).map(input => input.value);
-	try {
-        	await updateSheetData(`Pool Pro Live - Form Submissions!A${entry[0]}:Z${entry[0]}`, [updatedValues]);
-        	alert('Changes saved successfully!');
-	 } catch (error) {
-            alert('Failed to update. Please ensure you are signed in and authorized.');
-            console.error(error);
-        }   
+    const formData = new FormData(form);
+    const updated = {};
+    formData.forEach((value, key) => {
+      if (!nonEditableFields.includes(key)) {
+	
+	//Validate fields
+	  if (key === 'dateofpurchase'){
+		//console.log('Dateofpurchase:');
+		//console.log(value);
+		updated[key] = new Date(0);
+	  } else {      
+        	updated[key] = value;
+	  };
+      }
+	    //console.log(value);
     });
+
+	//alert('HALT ',data.status);  
+
+    const oldStatus = data.status;
+    const newStatus = updated.status;
+
+    if (newStatus === "complete"){
+	    if (oldStatus !== newStatus){
+		    updated['completedate'] = new Date(0);
+	    };
+    };
+
+    const { error: updateError } = await supabase
+      .from('tblwarranty')
+      .update(updated)
+      .eq('claimnumber', claimNumber);
+
+    if (updateError) {
+      console.log(updateError);
+      alert('Failed to update entry.');
+      return;
+    }
+
+    // Log status change
+    if (oldStatus !== newStatus) {
+      await supabase.from('status_logs').insert({
+        claimnumber: claimNumber,
+        oldstatus: oldStatus,
+        newstatus: newStatus,
+        changedat: new Date().toISOString()
+      });
+    }
+
+    //alert('Warranty request updated.');
+    window.location.href = `list.html?status=${encodeURIComponent(newStatus)}`;
+  });
 });

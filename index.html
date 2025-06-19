@@ -1,21 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warranty Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="static/js/auth.js"></script>
-    <script src="static/js/dashboard.js"></script>
-    <script src="static/js/sheets.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warranty Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <link rel='stylesheet' href="static/css/styles.css" type='text/css' media='all' />
 </head>
 <body>
-    <!-- Navigation Bar -->
+  <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Dashboard</a>
+        <a class="navbar-brand" href="index.html">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,78 +25,73 @@
                     <a class="nav-link" href="list.html">All Entries</a>
                 </li>
 		<li class="nav-item">
-            	    <button id="signin-button" class="btn btn-outline-success my-2 my-sm-0">Sign In</button>
+            	    <button id="logout-btn" class="btn btn-outline-danger">Logout</button>
 		</li>
             </ul>
         </div>
     </nav>
-
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Panel for All Entries -->
-            <div class="col-md-4">
-                <div class="card text-white bg-secondary mb-3">
-                    <div class="card-header">All Entries</div>
-                    <div class="card-body">
-                        <h5 class="card-title">View All Entries</h5>
-                        <a href="list.html" class="btn btn-light">View All</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Panel for New Requests -->
-            <div class="col-md-4">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-header">New Requests</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="new-requests-count">0</h5>
-                        <a href="list.html?status=New" class="btn btn-light">View New Requests</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Panels for Other Statuses -->
-            <div class="col-md-4">
-                <div class="card text-white bg-success mb-3">
-                    <div class="card-header">Viewed</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="viewed-count">0</h5>
-                        <a href="list.html?status=Viewed" class="btn btn-light">View Viewed Requests</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-header">In Progress</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="progress-count">0</h5>
-                        <a href="list.html?status=Progress" class="btn btn-light">View In Progress Requests</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-danger mb-3">
-                    <div class="card-header">Rejected</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="rejected-count">0</h5>
-                        <a href="list.html?status=Rejected" class="btn btn-light">View Rejected Requests</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-dark mb-3">
-                    <div class="card-header">Complete</div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="complete-count">0</h5>
-                        <a href="list.html?status=Complete" class="btn btn-light">View Complete Requests</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>Warranty Dashboard</h2>
+      <button id="viewLogsBtn" class="btn btn-info">View Status Logs</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="row" id="status-panels">
+      <div class="col-md-4 mb-4">
+        <div class="card text-white bg-secondary h-100">
+          <div class="card-body">
+            <h5 class="card-title">All</h5>
+            <p class="card-text fs-3">&nbsp;</p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <a href="list.html" class="btn btn-light">View All</a>
+          </div>
+        </div>
+      </div>
+      <!-- Status panels will be injected here -->
+    </div>
+  </div>
+<!-- In Field Panels -->
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>Infield Warranty Dashboard</h2>
+      
+    </div>
 
+    <div class="row" id="status-panels-infield">
+      <!-- Status panels will be injected here -->
+    </div>
+  </div>
+
+<!-- Report Panels -->
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>Reporting</h2>
+      
+    </div>
+
+    <div class="row" id="status-panels-reports">
+      <!-- Report panels will be injected here -->
+    </div>
+  </div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+	<!-- Trigger Button -->
+	<button id="viewLogsBtn" class="btn btn-info">View Status Logs</button>
+  </div>
+  
+	<!-- Modal -->
+	<div id="statusLogsModal" class="modal" style="display:none;">
+	  <div class="modal-content" id="modal-contentPanel">
+	    <span id="closeButton" class="close">&times;</span>
+	    <h4>Status Logs</h4>
+	    <ul id="logsList"></ul>
+	  </div>
+	</div>
+
+  <script src="static/js/supabaseClient.js" defer></script>
+  <script src="static/js/auth.js" defer></script>
+  <script src="static/js/dashboard.js" defer></script>
+  <script src="static/js/modal.js" defer></script>
 </body>
 </html>

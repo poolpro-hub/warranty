@@ -1,62 +1,63 @@
 
-//const token = localStorage.getItem('google_token');
+// list.js - Enhanced with sorting and filtering
 
-if (!token) {
-  alert('You must sign in first.');
-  window.location.href = 'index.html'; // or show sign-in prompt
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  const infield = params.get('infield');
 
+  document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-    const statusTitle = document.getElementById('status-title');
-    const requestsTable = document.getElementById('requests-list');//.getElementsByTagName('tbody')[0];
-    const data = await getSheetData('Pool Pro Live - Form Submissions');
-    const filteredData = data.find(row => row[1] === status);
+  let currentSort = { column: 'submissiondate', ascending: false };
 
-console.log("Status param=");
-console.log(status);
+  async function fetchAndRenderTable() {
+    const tbody = document.getElementById('requests-table-body');
+    tbody.innerHTML = '';
 
-    if (statusTitle) {
-        statusTitle.textContent = status;
-    } else {
-        console.error("Element with ID 'Status' not found.");
+    let query = supabase
+      .from('tblwarranty')
+      .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status, infield')
+      .order(currentSort.column, { ascending: currentSort.ascending });
+
+    if (status !== null) query = query.eq('status', status);
+    if (infield !== null) query = query.eq('infield', infield);
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error('Error fetching data:', error.message);
+      return;
     }
 
-//if (typeof status === "string" && status.length === 0){
-//    data.filter(row => row[1] === status).forEach(row => {
-if (status === null) {
-    data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-	    <td>${row[4]}</td>
-	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
-        `;
-        tr.addEventListener('click', () => {
-            window.location.href = `edit.html?claimNumber=${row[0]}`;
-        });
-        requestsTable.appendChild(tr);
+    data.forEach(entry => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
+        <td>${entry.infield || ''}</td>
+        <td>${entry.claimrequestedbyshopname || ''}</td>
+        <td>${entry.nameofenduser || ''}</td>
+        <td>${entry.equipmenttype || ''}</td>
+        <td>${entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString('en-GB') : ''}</td>
+        <td><strong>${entry.status}</strong></td>
+      `;
+      tbody.appendChild(row);
     });
-} else {
-    data.filter(row => row[1] === status).forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-	    <td>${row[4]}</td>
-	    <td><a href="edit.html?claimNumber=${row[0]}">Edit</a></td>
-        `;
-        tr.addEventListener('click', () => {
-            window.location.href = `edit.html?claimNumber=${row[0]}`;
-        });
-        requestsTable.appendChild(tr);
+  }
+
+  // Setup sorting on table headers
+  document.querySelectorAll('th[data-column]').forEach(header => {
+    header.style.cursor = 'pointer';
+    header.addEventListener('click', () => {
+      const column = header.getAttribute('data-column');
+      if (currentSort.column === column) {
+        currentSort.ascending = !currentSort.ascending;
+      } else {
+        currentSort = { column, ascending: true };
+      }
+      fetchAndRenderTable();
     });
-};
+  });
+
+  // Initial table render
+  fetchAndRenderTable();
 });
