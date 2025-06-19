@@ -1,19 +1,29 @@
 
-// list.js - Enhanced with sorting and filtering
-
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const status = params.get('status');
   const infield = params.get('infield');
 
-  document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
-
   let currentSort = { column: 'submissiondate', ascending: false };
+  let currentPage = 1;
+  let rowsPerPage = 10;
+  let allData = [];
 
-  async function fetchAndRenderTable() {
-    const tbody = document.getElementById('requests-table-body');
-    tbody.innerHTML = '';
+  const tbody = document.getElementById('requests-table-body');
+  const searchInput = document.getElementById('searchInput');
+  const rowsPerPageSelect = document.getElementById('rowsPerPage');
+  const pageInfo = document.getElementById('pageInfo');
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
+  const exportBtn = document.getElementById('exportBtn');
+  
+  if (status !== null) {
+	  document.getElementById('page-title').textContent = `Warranty Requests - ${status}`;
+  } else {
+	  document.getElementById('page-title').textContent = `Warranty Requests`;
+  };
 
+  async function fetchData() {
     let query = supabase
       .from('tblwarranty')
       .select('claimnumber, claimrequestedbyshopname, nameofenduser, equipmenttype, submissiondate, status, infield')
@@ -29,7 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    data.forEach(entry => {
+    allData = data;
+    currentPage = 1;
+    renderTable();
+  }
+
+  function renderTable() {
+    const keyword = searchInput.value.toLowerCase();
+    const filteredData = allData.filter(entry =>
+      Object.values(entry).some(val =>
+        (val || '').toString().toLowerCase().includes(keyword)
+      )
+    );
+
+    const start = (currentPage - 1) * rowsPerPage;
+    const paginatedData = filteredData.slice(start, start + rowsPerPage);
+
+    tbody.innerHTML = '';
+    paginatedData.forEach(entry => {
       const row = document.createElement('tr');
       row.innerHTML = `
         <td><a href="edit.html?claimnumber=${encodeURIComponent(entry.claimnumber)}">${entry.claimnumber}</a></td>
@@ -42,9 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       tbody.appendChild(row);
     });
+
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
   }
 
-  // Setup sorting on table headers
   document.querySelectorAll('th[data-column]').forEach(header => {
     header.style.cursor = 'pointer';
     header.addEventListener('click', () => {
@@ -54,10 +85,77 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         currentSort = { column, ascending: true };
       }
-      fetchAndRenderTable();
+      fetchData();
     });
   });
 
-  // Initial table render
-  fetchAndRenderTable();
+  searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    renderTable();
+  });
+
+  rowsPerPageSelect.addEventListener('change', () => {
+    rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
+    currentPage = 1;
+    renderTable();
+  });
+
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTable();
+    }
+  });
+
+  nextPageBtn.addEventListener('click', () => {
+    const keyword = searchInput.value.toLowerCase();
+    const filteredData = allData.filter(entry =>
+      Object.values(entry).some(val =>
+        (val || '').toString().toLowerCase().includes(keyword)
+      )
+    );
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderTable();
+    }
+  });
+
+  exportBtn.addEventListener('click', () => {
+    const keyword = searchInput.value.toLowerCase();
+    const filteredData = allData.filter(entry =>
+      Object.values(entry).some(val =>
+        (val || '').toString().toLowerCase().includes(keyword)
+      )
+    );
+
+    const csvRows = [
+      ['Claim #', 'Infield', 'Shop', 'End User', 'Equipment', 'Submitted', 'Status']
+    ];
+
+    filteredData.forEach(entry => {
+      csvRows.push([
+        entry.claimnumber,
+        entry.infield || '',
+        entry.claimrequestedbyshopname || '',
+        entry.nameofenduser || '',
+        entry.equipmenttype || '',
+        entry.submissiondate ? new Date(entry.submissiondate).toLocaleDateString('en-GB') : '',
+        entry.status
+      ]);
+    });
+
+    const csvContent = csvRows.map(e => e.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'warranty_requests.csv');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  fetchData();
 });
