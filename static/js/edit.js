@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
      
-            
+    } else if (field === 'completedate'){  
+	    //Do not render this input field
+		formGroup.className = 'col-md-6';
+      		formGroup.innerHTML = `${value}      
+      		`;	    
     } else {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = `
