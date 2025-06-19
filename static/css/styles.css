@@ -42,10 +42,10 @@ body {
 
 #statusLogsModal #closeButton  {
   float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-  padding-left: 90%;
+  font-size: 28px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  padding-left: 95%;
 }
 
 #modalPanel {
