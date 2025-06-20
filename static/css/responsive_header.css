@@ -1,0 +1,78 @@
+
+/* Base header styles */
+.app-header {
+  background: linear-gradient(to right, #0d6efd, #0a58ca);
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.app-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Navigation styles */
+.app-nav {
+  display: flex;
+  align-items: center;
+}
+
+.app-nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.app-nav a:hover {
+  color: #d1e0ff;
+}
+
+.app-nav button {
+  margin-left: 1rem;
+}
+
+/* Mobile toggle button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .app-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .app-nav.show {
+    display: flex;
+  }
+
+  .app-nav a, .app-nav button {
+    margin: 0.5rem 0;
+  }
+}
