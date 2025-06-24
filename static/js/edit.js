@@ -78,8 +78,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
     } else if (field === 'equipmenttype'){
-	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Set: ${value}`;
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: ${value}`;
  	dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+	dropdownHTML += `<option value=""></option>`;
   	arrayCategories.forEach(option => {
     		const isSelected = option === value;
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
