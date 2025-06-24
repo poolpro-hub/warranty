@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
   	});
   	dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6 just-a-little-padding';
+      formGroup.className = 'col-md-6 just-a-little-padding text-white bg-secondary';
       formGroup.innerHTML = dropdownHTML;
       
     } else if (field === 'infield'){
