@@ -96,3 +96,7 @@ body {
 .app-nav button {
   margin-left: 1rem;
 }
+
+.just-a-little-padding {
+	padding: 10px !important;
+}
