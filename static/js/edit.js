@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('edit-form');
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const yesno = ['No', 'Yes'];
+  const arrayCategories = ['Chlorinator','Heat Pump','Robot','Filter','Light','Pump','Cell','TDS Meter','Cleaner','Accessory','Not Pool Pro','Water Treatment','HPW','pH Controller'];
+  const arrayStockcodes = [''];
+  const arrayIssue = [''];
+  const arrayAction = [''];
+  const arrayLocation = [''];
 
   console.log('claimnumber:', claimNumber);
 
@@ -72,7 +77,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   	dropdownHTML += `</select>`;
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
-     
+    } else if (field === 'equipmenttype'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Set: ${value}`;
+ 	dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+  	arrayCategories.forEach(option => {
+    		const isSelected = option === value;
+    		dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+  	});
+  	dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+          
     } else if (field === 'completedate'){  
 	    //Do not render this input field
 		formGroup.className = 'col-md-6';
