@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (field === 'issue_description'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
 		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
-		dropdownHTML += `<option value="">Select an option from the list</option>`;
 		arrayIssue.forEach(option => {
 				const isSelected = option === value;
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
@@ -115,7 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (field === 'action_taken'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
 		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
-		dropdownHTML += `<option value="">Select an option from the list</option>`;
 		arrayAction.forEach(option => {
 				const isSelected = option === value;
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
