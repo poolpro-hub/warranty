@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
     } else if (field === 'equipmenttype'){
-	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: ${value}`;
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: <strong>${value}</strong>`;
 		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
 		dropdownHTML += `<option value="">Select an option from the list</option>`;
 		arrayCategories.forEach(option => {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
     } else if (field === 'modelnumber'){
-	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: ${value}`;
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: <strong>${value}</strong>`;
 		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
 		dropdownHTML += `<option value="">Select an option from the list</option>`;
 		arrayStockcodes.forEach(option => {
@@ -99,7 +99,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 		dropdownHTML += `</select>`;
       formGroup.className = 'col-md-6';
       formGroup.innerHTML = dropdownHTML;
-                    
+
+    } else if (field === 'issue_description'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
+		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+		dropdownHTML += `<option value="">Select an option from the list</option>`;
+		arrayIssue.forEach(option => {
+				const isSelected = option === value;
+				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+		});
+		dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+ 
+    } else if (field === 'action_taken'){
+	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label>`;
+		dropdownHTML += `<select class="form-control" id="${field}" name="${field}">`;
+		dropdownHTML += `<option value="">Select an option from the list</option>`;
+		arrayAction.forEach(option => {
+				const isSelected = option === value;
+				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
+		});
+		dropdownHTML += `</select>`;
+      formGroup.className = 'col-md-6';
+      formGroup.innerHTML = dropdownHTML;
+   
     } else if (field === 'completedate'){  
 	    //Do not render this input field
 		formGroup.className = 'col-md-6';
