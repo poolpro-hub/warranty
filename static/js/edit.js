@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
 		});
 		dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12 text-white bg-warning';
       formGroup.innerHTML = dropdownHTML;
     } else if (field === 'modelnumber'){
 	let dropdownHTML = `<label for="${field}" class="form-label">${field}</label> Currently Set: <strong>${value}</strong>`;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
 		});
 		dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12 text-white bg-warning';
       formGroup.innerHTML = dropdownHTML;
 
     } else if (field === 'issue_description'){
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
 		});
 		dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12 text-white bg-warning';
       formGroup.innerHTML = dropdownHTML;
  
     } else if (field === 'action_taken'){
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dropdownHTML += `<option value="${option}" ${isSelected ? 'selected' : ''}>${option}</option>`;
 		});
 		dropdownHTML += `</select>`;
-      formGroup.className = 'col-md-6';
+      formGroup.className = 'col-md-12 text-white bg-warning';
       formGroup.innerHTML = dropdownHTML;
    
     } else if (field === 'completedate'){  
