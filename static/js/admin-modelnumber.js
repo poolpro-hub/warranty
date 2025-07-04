@@ -4,6 +4,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadItems() {
+  console.log('Loading items...');
+	
   const { data, error } = await supabase
     .from('modelnumber')
     .select('*')
