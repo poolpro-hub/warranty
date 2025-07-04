@@ -6,6 +6,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('edit-form');
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const yesno = ['No', 'Yes'];
+  
+  // TESTING -----------------------------------------
+  
+const { data, error } = await supabase
+  .from('equipmenttype')
+  .select('*');
+
+console.log('Raw data:', data);
+console.log('Error:', error);
+
+//-------------------------------------------------------
+  
+  
   const { data: categories, error: catError } = await supabase
   		.from('equipmenttype')
   		.select('*');
