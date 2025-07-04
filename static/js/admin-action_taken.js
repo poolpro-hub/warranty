@@ -14,7 +14,6 @@ async function loadItems() {
     data.forEach(item => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${item.id}</td>
         <td contenteditable="true" onblur="updateItem(${item.id}, this.innerText)">${item.name}</td>
         <td>${item.active ? 'Yes' : 'No'}</td>
         <td>
