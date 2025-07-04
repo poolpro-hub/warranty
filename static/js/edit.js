@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	  .select('name')
 	  .eq('active', true)
 	  .order('name', { ascending: true });
-  const arrayIssue = action.map(c => c.name);
+  const arrayAction = action.map(c => c.name);
   //const arrayAction = ['Crystal repaired','Robotek repaired','LedRex repaired','Adam repaired infield','Adam repaired workshop','Crystal replaced parts','Robotek replaced parts','Replace new stock','Emaux Replaced parts','AES Repair','Craig repaired infield','Aqua Idea repaired infield','Infield / Crystal repaired','Tom repaired infield','Quote to repair','Referred to Service Agent','Sent replacement parts','Updated PCB','Adam infeild Crystal repaired','Brendan Inspected','Store Repaired','Rectified over the phone','Brendan & Adam Replaced','Emailed how to fix problem','Closed claim','Shipped back to customer','Adam advised customer','Quote to replace','Hard reset unit problem fixed','Adam repaired infeild not warranty','Adam delivered replacement part','Adam replaced infield','Quoted replacement parts','Jason Repaired Infield','Jason Replaced Infield','Repaired in VIC','Warren Completed','Glenn replaced infield','Returned to customer','Sent replacement parts','Crystal Replaced','Graham Advised Customer','Replaced by Sydney','Nothing done','jason repaired workshop','Store Checked NFF','"Problem resolved',' closed claim"','Credit issued to customer','Shop rectified issue','Glenn returned to customer','Adam tested & advised customer','Replaced control panel in workshop'];
   const arrayLocation = [''];
 
