@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // TESTING -----------------------------------------
   
-const { data, error } = await supabase
+const { data1, error1 } = await supabase
   .from('equipmenttype')
   .select('*');
 
-console.log('Raw data:', data);
-console.log('Error:', error);
+console.log('Raw data:', data1);
+console.log('Error:', error1);
 
 //-------------------------------------------------------
   
