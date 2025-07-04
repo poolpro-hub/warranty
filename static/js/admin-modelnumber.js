@@ -19,7 +19,7 @@ async function loadItems() {
         <td contenteditable="true" onblur="updateItem(${item.id}, this.innerText)">${item.name}</td>
         <td>${item.active ? 'Yes' : 'No'}</td>
         <td>
-          <button onclick="toggleActive(${item.id}, ${item.active})">
+          <button onclick="toggleActive(${item.id})">
             ${item.active ? 'Deactivate' : 'Activate'}
           </button>
         </td>
