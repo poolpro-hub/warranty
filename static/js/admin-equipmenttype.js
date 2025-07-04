@@ -1,6 +1,4 @@
-
-
-const supabase = supabase.createClient('https://your-project.supabase.co', 'public-anon-key');
+document.addEventListener('DOMContentLoaded', async () => {
 
 
 async function loadItems() {
@@ -56,3 +54,4 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
 });
 
 loadItems();
+});
