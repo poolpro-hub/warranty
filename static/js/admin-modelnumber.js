@@ -1,7 +1,7 @@
 
 
 //const supabase = supabase.createClient('https://your-project.supabase.co', 'public-anon-key');
-
+document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadItems() {
   const { data, error } = await supabase
@@ -56,3 +56,5 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
 });
 
 loadItems();
+
+});
