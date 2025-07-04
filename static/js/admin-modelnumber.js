@@ -1,6 +1,6 @@
 
 
-const supabase = supabase.createClient('https://your-project.supabase.co', 'public-anon-key');
+//const supabase = supabase.createClient('https://your-project.supabase.co', 'public-anon-key');
 
 
 async function loadItems() {
