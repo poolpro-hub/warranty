@@ -64,6 +64,8 @@ async function toggleActive(id) {
   }
 }
 
+window.toggleActive = toggleActive;
+window.updateItem = updateItem;
 
 document.getElementById('add-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -75,7 +77,6 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
 });
 
 loadItems();
-window.toggleActive = toggleActive;
-window.updateItem = updateItem;
+
 
 });
