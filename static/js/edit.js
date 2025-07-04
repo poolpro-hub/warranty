@@ -7,10 +7,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const yesno = ['No', 'Yes'];
   const { data: categories, error: catError } = await supabase
-	  .from('equipmenttype')
-	  .select('*')
-	  .eq('active', true)
-	  .order('name', { ascending: true });
+  		.from('equipmenttype')
+  		.select('*');
+
   const arrayCategories = categories.map(c => c.name);
 
   //const arrayCategories = ['Chlorinator','Heat Pump','Robot','Filter','Light','Pump','Cell','TDS Meter','Cleaner','Accessory','Not Pool Pro','Water Treatment','HPW','pH Controller'];
