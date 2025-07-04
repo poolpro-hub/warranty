@@ -55,5 +55,7 @@ document.getElementById('add-form').addEventListener('submit', async (e) => {
 });
 
 loadItems();
+window.toggleActive = toggleActive;
+window.updateItem = updateItem;
 
 });
