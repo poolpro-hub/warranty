@@ -37,13 +37,33 @@ async function updateItem(id, newName) {
   loadItems();
 }
 
-async function toggleActive(id, currentStatus) {
-  await supabase
-    .from('modelnumber')
-    .update({ active: !currentStatus })
+async function toggleActive(id) {
+  // Fetch the current value from the database
+  const { data, error } = await supabase
+    .from('modelnumber') // replace with actual table
+    .select('active')
+    .eq('id', id)
+    .single();
+
+  if (error || !data) {
+    console.error('Error fetching current status:', error);
+    return;
+  }
+
+  const newStatus = !data.active;
+
+  const { error: updateError } = await supabase
+    .from('modelnumber') // replace with actual table
+    .update({ active: newStatus })
     .eq('id', id);
-  loadItems();
+
+  if (updateError) {
+    console.error('Error updating status:', updateError);
+  } else {
+    loadItems(); // refresh the table
+  }
 }
+
 
 document.getElementById('add-form').addEventListener('submit', async (e) => {
   e.preventDefault();
