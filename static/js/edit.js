@@ -14,21 +14,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   const arrayCategories = categories.map(c => c.name);
 
   //const arrayCategories = ['Chlorinator','Heat Pump','Robot','Filter','Light','Pump','Cell','TDS Meter','Cleaner','Accessory','Not Pool Pro','Water Treatment','HPW','pH Controller'];
-  const { data: stockcodes, error: catError } = await supabase
+  const { data: stockcodes, error: stockError } = await supabase
 	  .from('modelnumber')
 	  .select('name')
 	  .eq('active', true)
 	  .order('name', { ascending: true });
   const arrayStockcodes = stockcodes.map(c => c.name);
   //const arrayStockcodes = ['GW5500 - GT3','NDC15','NDC25','NDC35','NDC45','NDC55','CPPS15','CPPS20','CPPS30','CPPS30C','CPPS40','CPPS40C','CPPS50','CPPS50C','GW4900 - Plus','GW4900V2','GW4901','GW5100','GW5500','NPP1100','NPP1500','NPP550','NPP750','NPVS150','SF500','SF650','SF700','SF800','CF100','CF150','CF200','CF50','CPP20','CPP30','CPP40','GW4500 - Acrobat','PFC100','NPLR - Blue','NPLR - White','NPLR - Multi','TRT901C','Heater','other','PWSF650P','inver x','PPHPBOX','PHC1 (ph controler)','GW9500','Generic cell','TDS901C','AES AI28','Waterlink Spin Machine','NDCMX35','NHX Heater','GW4907 Robo Pro 30','Aiper','Heater','NDCMX25','InverX X30','InverX X45','InverX X60','InverX X80','88B2','Onga Pump','SMX25RP','NPE550','NPE750','NPE1500','NPE2000','X-Eco','GW4905 Robo Pro','KM1000','WT100-VS','WT150-VS','NPX1100','HPW','SR30','NDC100','88L5','NDC75C','NDC100C','GW9600 Phoenix','NPX1500','NPX2000','NPX2500'];
-   const { data: issues, error: catError } = await supabase
+   const { data: issues, error: issueError } = await supabase
 	  .from('issue_description')
 	  .select('name')
 	  .eq('active', true)
 	  .order('name', { ascending: true });
   const arrayIssue = issues.map(c => c.name);
   //const arrayIssue = ['Bearings & Seals','Overheating - High Salt','Not Warranty Ran Dry','Main PCB','Timer','Cell','Gear kit','MPV','Tank Leaking','Touchpad','Software Update','Wet end','Water entry','Hose','Other','Drive belts','Cell','Pro Rata','Not Warranty','Tanks','Membrane','Diaphragm','Leaking','Low Production','Leaking to waste','Pressure Gauge','Laterals','Power Pack','Tripping Power','Pump','Lid','Noisy','Locking Ring','Quote to repair','LCD Display Board','Mechanical Seal','Inverter Board','Control Box','Unions','No Response','Tracks','Rotor','Intergrated Board','No Fault Found','Control Panel','Unit out of warranty','No Display','No Production','blocked impellor','Replaced stock','No Flow Fault','Leaking from tank','Outer Tube','Charge Cable','E2 Motor Error','Inverter Board','Capacitor','Cell Housing','Control Box Cover','Will Not Start'];
-  const { data: action, error: catError } = await supabase
+  const { data: action, error: actionError } = await supabase
 	  .from('action_taken')
 	  .select('name')
 	  .eq('active', true)
