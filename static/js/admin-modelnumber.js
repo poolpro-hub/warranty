@@ -1,6 +1,4 @@
 
-
-//const supabase = supabase.createClient('https://your-project.supabase.co', 'public-anon-key');
 document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadItems() {
@@ -71,10 +69,10 @@ window.updateItem = updateItem;
 
 document.getElementById('add-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const name = document.getElementById('new-name').value.trim();
+  const name = document.getElementById('new-entry').value.trim();
   if (!name) return;
   await supabase.from('modelnumber').insert([{ name }]);
-  document.getElementById('new-name').value = '';
+  document.getElementById('new-entry').value = '';
   loadItems();
 });
 
