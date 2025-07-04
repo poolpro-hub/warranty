@@ -7,21 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statuses = ['New', 'Viewed', 'Progress', 'Rejected', 'Complete'];
   const yesno = ['No', 'Yes'];
   
-  // TESTING -----------------------------------------
-  
-const { data:data1, error:error1 } = await supabase
-  .from('equipmenttype')
-  .select('*');
-
-console.log('Raw data:', data1);
-console.log('Error:', error1);
-
-//-------------------------------------------------------
-  
-  
   const { data: categories, error: catError } = await supabase
   		.from('equipmenttype')
-  		.select('*');
+  		.select('name')
+	  .eq('active', true)
+	  .order('name', { ascending: true });
 
   const arrayCategories = categories.map(c => c.name);
 
