@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const yesno = ['No', 'Yes'];
   const { data: categories, error: catError } = await supabase
 	  .from('equipmenttype')
-	  .select('name')
+	  .select(*)
 	  .eq('active', true)
 	  .order('name', { ascending: true });
   const arrayCategories = categories.map(c => c.name);
